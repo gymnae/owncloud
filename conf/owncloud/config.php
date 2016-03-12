@@ -1,6 +1,6 @@
 <?php
 $CONFIG = array(
-  'datadirectory' => '/DATA/data',
+  'datadirectory' => '/media/owncloud/data',
   'apps_paths' => array (
     0 => array (
       'path' => OC::$SERVERROOT.'/apps',

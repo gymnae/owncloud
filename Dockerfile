@@ -20,6 +20,14 @@ RUN apk-install \
     libpq \
     libxml2 \
     libbz2 \
+ php-mcrypt \
+    php-openssl \
+    php-pgsql \
+    php-pdo_pgsql \
+    php-posix \
+  php-dom \
+    php-exif \
+    php-gd \
     php-bz2 \
     php-ctype \
     php-dom \
