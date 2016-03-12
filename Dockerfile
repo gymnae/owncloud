@@ -11,7 +11,9 @@ FROM gymnae/webserverbase
 
 # add the packages needed and other initial preparations
 RUN apk-install \
+    # redis server
     redis \
+    # server modules
     freetype \    
     libmcrypt \
     libjpeg \
@@ -20,24 +22,27 @@ RUN apk-install \
     libpq \
     libxml2 \
     libbz2 \
- php-mcrypt \
+    ffmpeg \
+    # additional php modules
+    php-mcrypt \
     php-openssl \
     php-pgsql \
     php-pdo_pgsql \
+    php-pdo_mysql
     php-posix \
-  php-dom \
+    php-dom \
+    php-ftp \
     php-exif \
-    php-gd \
+    php-intl \
+    php-gmp \
     php-bz2 \
     php-ctype \
-    php-dom \
-    php-exif \
     php-iconv \
-    php-json \
     php-xml \
     php-zip \
     php-zlib \
-php-redis@testing \
+    php-redis@testing \
+    #owncloud packages
 	owncloud-mysql \
 	owncloud-texteditor \
 	owncloud-documents \
@@ -51,21 +56,14 @@ php-redis@testing \
 	  rm -rf /var/cache/apk/*
 
 # make folders
-#RUN mkdir -pv /opt/www/owncloud
 RUN mkdir -pv /etc/nginx/sites-enabled/
-## Fixes: PHP is configured to populate raw post data. Since PHP 5.6 this will lead to PHP throwing notices for perfectly valid code. #19
-#RUN echo 'always_populate_raw_post_data = -1' | tee -a /etc/php/cli/php.ini /etc/php/php.ini
-
-## Allow usage of `sudo -u www-data php /var/www/owncloud/occ` with APC.
-## FIXME: Temporally: https://github.com/owncloud/core/issues/17329
-#RUN echo 'apc.enable_cli = 1' >> /etc/php5/cli/php.ini
 
 # Volumes
 VOLUME ["/media/owncloud"]
 
 
 # environment files at the end
-# usually ignored once installled
+# usually ignored once installed
 ENV OWNCLOUDVERSION=8.2.2
 
 # expose the ports needed
