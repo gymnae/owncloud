@@ -28,7 +28,7 @@ RUN apk-install \
     php-openssl \
     php-pgsql \
     php-pdo_pgsql \
-    php-pdo_mysql
+    php-pdo_mysql \
     php-posix \
     php-dom \
     php-ftp \
