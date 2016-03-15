@@ -41,6 +41,7 @@ RUN apk-install \
     php-xml \
     php-zip \
     php-zlib \
+    php-xmlreader \
     php-redis@testing \
     #owncloud packages
 	owncloud-mysql \
