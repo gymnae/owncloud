@@ -10,6 +10,7 @@
 FROM gymnae/webserverbase
 
 # add the packages needed and other initial preparations
+#RUN apk update && apk info -a \
 RUN apk-install \
     # redis server
     redis \
@@ -33,6 +34,7 @@ RUN apk-install \
     php-dom \
     php-ftp \
     php-exif \
+    php-mysql \
     php-intl \
     php-gmp \
     php-bz2 \
@@ -44,7 +46,7 @@ RUN apk-install \
     php-xmlreader \
     php-redis@testing \
     #owncloud packages
-	owncloud-mysql \
+	owncloud \
 	owncloud-texteditor \
 	owncloud-documents \
 	owncloud-contacts \
@@ -52,9 +54,8 @@ RUN apk-install \
 	owncloud-encryption \
 	owncloud-music \
 	owncloud-external \
-	musl \
-	owncloud-videoviewer && \
-	  rm -rf /var/cache/apk/*
+	musl \ 
+	owncloud-videoplayer 
 
 # make folders
 RUN mkdir -pv /etc/nginx/sites-enabled/
