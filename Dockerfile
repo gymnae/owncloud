@@ -10,7 +10,10 @@
 FROM gymnae/webserverbase
 
 # add the packages needed and other initial preparations
-#RUN apk update && apk info -a \
+
+RUN mkdir -p /media/owncloud/apps /usr/share/webapps/owncloud/ \ 
+	&& ln -s /media/owncloud/apps /usr/share/webapps/owncloud/apps
+
 RUN apk-install \
     # redis server
     redis \
@@ -66,10 +69,11 @@ VOLUME ["/media/owncloud"]
 
 # environment files at the end
 # usually ignored once installed
-ENV OWNCLOUDVERSION=8.2.2
+#ENV OWNCLOUDVERSION=8.2.2
 
 # expose the ports needed
 EXPOSE 80 443
+
 
 # copy configs
 COPY conf/nginx/nginx.conf /etc/nginx/
@@ -83,4 +87,3 @@ ADD init.sh /init.sh
 RUN chmod +x /init.sh
 
 CMD ["/init.sh"]
-
