@@ -10,6 +10,7 @@
       && chmod -R 0770 /media/owncloud/config
 [ -d /usr/share/webapps/owncloud/config ] && rm -rf /usr/share/webapps/owncloud/config
 ln -s /media/owncloud/config /usr/share/webapps/owncloud/config
+ln -s /media/owncloud/apps /usr/share/webapps/owncloud/apps2
 
 # create default config.php
 [ ! -f /media/owncloud/config/config.php ] \
@@ -45,9 +46,9 @@ ln -s /media/owncloud/config /usr/share/webapps/owncloud/config
       && chown nginx:www-data /media/owncloud/logs/owncloud \
       && chmod 0770 /media/owncloud/logs/owncloud
 
-# start redis and make it run as deamon
-mkdir -p /media/owncloud/cache
-redis-server --dir /media/owncloud/cache --appendonly yes --daemonize yes
+# only needed, if you don't have redis as a server  start redis and make it run as deamon
+#mkdir -p /media/owncloud/cache
+#redis-server --dir /media/owncloud/cache --appendonly yes --daemonize yes
 
 # start php-fpm
 mkdir -p /media/owncloud/logs/php-fpm

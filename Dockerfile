@@ -11,8 +11,6 @@ FROM gymnae/webserverbase
 
 # add the packages needed and other initial preparations
 
-RUN mkdir -p /media/owncloud/apps /usr/share/webapps/owncloud/ \ 
-	&& ln -s /media/owncloud/apps /usr/share/webapps/owncloud/apps
 
 RUN apk-install \
     # redis server
