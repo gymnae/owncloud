@@ -55,6 +55,7 @@ RUN apk-install \
 	owncloud-encryption \
 	owncloud-music \
 	owncloud-external \
+	owncloud-gallery \
 	musl \ 
 	owncloud-videoplayer 
 
