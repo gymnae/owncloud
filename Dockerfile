@@ -11,9 +11,6 @@ FROM gymnae/webserverbase
 
 # add the packages needed and other initial preparations
 
-# gymnae/webserverbase usually starts nginx as 'nginx'
-
-USER root
 RUN apk-install \
     # redis server
     redis \
