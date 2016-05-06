@@ -7,7 +7,7 @@
 #	4. https://github.com/psi-4ward/docker-owncloud/
 #
 
-FROM gymnae/webserverbase
+FROM gymnae/webserverbase:latest
 
 # add the packages needed and other initial preparations
 
@@ -25,16 +25,12 @@ RUN apk-install \
     libbz2 \
     ffmpeg \
     # additional php modules
-    php5-mcrypt \
-    php5-openssl \
-    php5-pgsql \
     php5-pdo_pgsql \
     php5-pdo_mysql \
     php5-posix \
     php5-dom \
     php5-ftp \
     php5-exif \
-    php5-mysql \
     php5-intl \
     php5-gmp \
     php5-bz2 \
@@ -42,9 +38,7 @@ RUN apk-install \
     php5-iconv \
     php5-xml \
     php5-zip \
-    php5-zlib \
     php5-xmlreader \
-    php-redis@testing \
     #owncloud packages
 	owncloud \
 	owncloud-texteditor \
