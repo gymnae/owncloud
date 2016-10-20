@@ -46,7 +46,7 @@ RUN apk-install \
 	owncloud-contacts \
 	owncloud-calendar \
 	# owncloud-encryption \
-	nextcloud-music \
+	owncloud-music \
 	nextcloud-gallery \
 	nextcloud-activity \
 	nextcloud-templateeditor \
