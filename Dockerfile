@@ -39,18 +39,18 @@ RUN apk-install \
     php5-xml \
     php5-zip \
     php5-xmlreader \
-    #owncloud packages
-	owncloud \
-	owncloud-texteditor \
-	owncloud-documents \
-	owncloud-contacts \
-	owncloud-calendar \
-	owncloud-encryption \
-	owncloud-music \
-	owncloud-external \
-	owncloud-gallery \
+    #nextcloud packages
+	nextcloud \
+	nextcloud-texteditor \
+	nextcloud-documents \
+	nextcloud-contacts \
+	nextcloud-calendar \
+	nextcloud-encryption \
+	nextcloud-music \
+	nextcloud-external \
+	nextcloud-gallery \
 	musl \ 
-	owncloud-videoplayer 
+	nextcloud-videoplayer 
 
 # make folders
 RUN mkdir -pv /etc/nginx/sites-enabled/
