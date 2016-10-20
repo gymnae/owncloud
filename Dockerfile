@@ -42,13 +42,16 @@ RUN apk-install \
     #nextcloud packages
 	nextcloud \
 	nextcloud-texteditor \
-	nextcloud-documents \
-	nextcloud-contacts \
-	nextcloud-calendar \
-	nextcloud-encryption \
+	owncloud-documents \
+	owncloud-contacts \
+	owncloud-calendar \
+	# owncloud-encryption \
 	nextcloud-music \
-	nextcloud-external \
 	nextcloud-gallery \
+	nextcloud-activity \
+	nextcloud-templateeditor \
+	nextcloud-doc \
+	nextcloud-pdfviewer \
 	musl \ 
 	nextcloud-videoplayer 
 
