@@ -1,6 +1,8 @@
 ##
 #
-# owncloud based on, inspired by and ripped off from:
+# EXPERIMENTAL branch of nextcloud based on owncloud docker file
+#
+# nextcloud based on, inspired by and ripped off from:
 #	1. http://wiki.alpinelinux.org/wiki/OwnCloud
 #	2. https://github.com/jchaney/owncloud
 #	3. https://github.com/splattael/docker-owncloud/blob/master/Makefile
@@ -24,6 +26,7 @@ RUN apk-install \
     libxml2 \
     libbz2 \
     ffmpeg \
+    musl \ 
     # additional php modules
     php5-pdo_pgsql \
     php5-pdo_mysql \
@@ -52,7 +55,6 @@ RUN apk-install \
 	nextcloud-templateeditor \
 	nextcloud-doc \
 	nextcloud-pdfviewer \
-	musl \ 
 	nextcloud-videoplayer 
 
 # make folders
@@ -61,14 +63,8 @@ RUN mkdir -pv /etc/nginx/sites-enabled/
 # Volumes
 VOLUME ["/media/owncloud"]
 
-
-# environment files at the end
-# usually ignored once installed
-#ENV OWNCLOUDVERSION=8.2.2
-
 # expose the ports needed
 EXPOSE 80 443
-
 
 # copy configs
 COPY conf/nginx/nginx.conf /etc/nginx/
