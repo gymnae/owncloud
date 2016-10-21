@@ -27,6 +27,8 @@ RUN apk-install \
     libbz2 \
     ffmpeg \
     musl \ 
+    python \
+    py2-pip \
     # additional php modules
     php5-pdo_pgsql \
     php5-pdo_mysql \
@@ -45,11 +47,11 @@ RUN apk-install \
     #nextcloud packages
 	nextcloud \
 	nextcloud-texteditor \
-	owncloud-documents \
-	owncloud-contacts \
-	owncloud-calendar \
-	# owncloud-encryption \
-	owncloud-music \
+	#owncloud-documents \
+	#owncloud-contacts \
+	#owncloud-calendar \
+	#owncloud-encryption \
+	#owncloud-music \
 	nextcloud-gallery \
 	nextcloud-activity \
 	nextcloud-templateeditor \
@@ -57,6 +59,9 @@ RUN apk-install \
 	nextcloud-pdfviewer \
 	nextcloud-notifications \
 	nextcloud-videoplayer 
+
+# install pythong pips for geolocation of gpx files for nextcloud app gpxpod
+RUN pip install gpxpy geojson
 
 # make folders
 RUN mkdir -pv /etc/nginx/sites-enabled/
