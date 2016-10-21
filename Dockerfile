@@ -55,6 +55,7 @@ RUN apk-install \
 	nextcloud-templateeditor \
 	nextcloud-doc \
 	nextcloud-pdfviewer \
+	nextcloud-notifications \
 	nextcloud-videoplayer 
 
 # make folders
