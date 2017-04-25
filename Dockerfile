@@ -15,7 +15,7 @@ FROM gymnae/webserverbase:latest
 
 RUN apk-install \
     # redis server
-    redis \
+  #  redis \
     # server modules
     freetype \    
     libmcrypt \
@@ -44,21 +44,22 @@ RUN apk-install \
     php7-xml@testing \
     php7-zip@testing \
     php7-xmlreader@testing \
+    php7-json@testing \
     #nextcloud packages
-	nextcloud \
-	nextcloud-texteditor \
+	nextcloud@community \
+	nextcloud-texteditor@community \
 	#owncloud-documents \
 	#owncloud-contacts \
 	#owncloud-calendar \
 	#owncloud-encryption \
 	#owncloud-music \
-	nextcloud-gallery \
-	nextcloud-activity \
-	nextcloud-templateeditor \
-	nextcloud-doc \
-	nextcloud-pdfviewer \
-	nextcloud-notifications \
-	nextcloud-videoplayer 
+	nextcloud-gallery@community \
+	nextcloud-activity@community \
+	nextcloud-templateeditor@community \
+	nextcloud-doc@community \
+	nextcloud-pdfviewer@community \
+	nextcloud-notifications@community \
+	nextcloud-videoplayer@community 
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
 RUN pip install gpxpy geojson
