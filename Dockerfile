@@ -48,11 +48,6 @@ RUN apk-install \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-texteditor@community \
-	#owncloud-documents \
-	#owncloud-contacts \
-	#owncloud-calendar \
-	#owncloud-encryption \
-	#owncloud-music \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
 	nextcloud-templateeditor@community \
