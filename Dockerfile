@@ -71,7 +71,7 @@ EXPOSE 80 443
 # copy configs
 COPY conf/nginx/nginx.conf /etc/nginx/
 COPY conf/nginx/sites-enabled/default.conf /etc/nginx/sites-enabled/default.conf
-COPY conf/php-fpm/php-fpm.conf /etc/php5/
+COPY conf/php-fpm/php-fpm.conf /etc/php7/
 COPY conf/owncloud/config.php /tmp/
 COPY conf/autoconfig.php /tmp/
 
