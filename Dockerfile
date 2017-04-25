@@ -1,6 +1,8 @@
 ##
 #
-# owncloud based on, inspired by and ripped off from:
+# EXPERIMENTAL branch of nextcloud based on owncloud docker file
+#
+# nextcloud based on, inspired by and ripped off from:
 #	1. http://wiki.alpinelinux.org/wiki/OwnCloud
 #	2. https://github.com/jchaney/owncloud
 #	3. https://github.com/splattael/docker-owncloud/blob/master/Makefile
@@ -13,7 +15,7 @@ FROM gymnae/webserverbase:latest
 
 RUN apk-install \
     # redis server
-    redis \
+  #  redis \
     # server modules
     freetype \    
     libmcrypt \
@@ -24,6 +26,9 @@ RUN apk-install \
     libxml2 \
     libbz2 \
     ffmpeg \
+    musl \ 
+    python \
+    py2-pip \
     # additional php modules
     php7-pdo_pgsql@testing \
     php7-pdo_mysql@testing \
@@ -39,18 +44,20 @@ RUN apk-install \
     php7-xml@testing \
     php7-zip@testing \
     php7-xmlreader@testing \
-    #owncloud packages
-	owncloud \
-	owncloud-texteditor \
-	owncloud-documents \
-	owncloud-contacts \
-	owncloud-calendar \
-	owncloud-encryption \
-	owncloud-music \
-	owncloud-external \
-	owncloud-gallery \
-	musl \ 
-	owncloud-videoplayer 
+    php7-json@testing \
+    #nextcloud packages
+	nextcloud@community \
+	nextcloud-texteditor@community \
+	nextcloud-gallery@community \
+	nextcloud-activity@community \
+	nextcloud-templateeditor@community \
+	nextcloud-doc@community \
+	nextcloud-pdfviewer@community \
+	nextcloud-notifications@community \
+	nextcloud-videoplayer@community 
+
+# install pythong pips for geolocation of gpx files for nextcloud app gpxpod
+RUN pip install gpxpy geojson
 
 # make folders
 RUN mkdir -pv /etc/nginx/sites-enabled/
@@ -58,14 +65,8 @@ RUN mkdir -pv /etc/nginx/sites-enabled/
 # Volumes
 VOLUME ["/media/owncloud"]
 
-
-# environment files at the end
-# usually ignored once installed
-#ENV OWNCLOUDVERSION=8.2.2
-
 # expose the ports needed
 EXPOSE 80 443
-
 
 # copy configs
 COPY conf/nginx/nginx.conf /etc/nginx/

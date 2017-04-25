@@ -8,9 +8,9 @@
       && mkdir -p /media/owncloud/config \
       && chown -R nginx:www-data /media/owncloud/config \
       && chmod -R 0770 /media/owncloud/config
-[ -d /usr/share/webapps/owncloud/config ] && rm -rf /usr/share/webapps/owncloud/config
-ln -s /media/owncloud/config /usr/share/webapps/owncloud/config
-ln -s /media/owncloud/apps /usr/share/webapps/owncloud/apps2
+[ -d /usr/share/webapps/nextcloud/config ] && rm -rf /usr/share/webapps/nextcloud/config
+ln -s /media/owncloud/config /usr/share/webapps/nextcloud/config
+ln -s /media/owncloud/apps /usr/share/webapps/nextcloud/apps2
 
 # create default config.php
 [ ! -f /media/owncloud/config/config.php ] \
