@@ -45,6 +45,7 @@ RUN apk-install \
     php7-zip@testing \
     php7-xmlreader@testing \
     php7-json@testing \
+    php7-xmlwriter@testing \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-texteditor@community \
