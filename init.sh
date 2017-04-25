@@ -52,7 +52,7 @@ ln -s /media/owncloud/apps /usr/share/webapps/nextcloud/apps2
 
 # start php-fpm
 mkdir -p /media/owncloud/logs/php-fpm
-php7-fpm
+php-fpm7
 
 # start nginx
 mkdir -p /media/owncloud/logs/nginx
