@@ -51,7 +51,7 @@ RUN apk-install \
 	nextcloud-texteditor@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
-	nextcloud-templateeditor@community \
+	#nextcloud-templateeditor@community \
 	nextcloud-doc@community \
 	nextcloud-pdfviewer@community \
 	nextcloud-notifications@community \
