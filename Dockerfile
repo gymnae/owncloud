@@ -30,23 +30,22 @@ RUN apk-install \
     python \
     py2-pip \
     # additional php modules
-    php7-pdo_pgsql@testing \
-    php7-pdo_mysql@testing \
-    php7-posix@testing \
-    php7-dom@testing \
-    php7-ftp@testing \
-    php7-exif@testing \
-    php7-intl@testing \
-    php7-gmp@testing \
-    php7-bz2@testing \
-    php7-ctype@testing \
-    php7-iconv@testing \
-    php7-xml@testing \
-    php7-zip@testing \
-    php7-xmlreader@testing \
-    php7-json@testing \
-    php7-xmlwriter@testing \
-    php7-fileinfo@testing \
+    php7-pdo_pgsql@community \
+    php7-posix@community \
+    php7-dom@community \
+    php7-ftp@community \
+    php7-exif@community \
+    php7-intl@community \
+    php7-gmp@community \
+    php7-bz2@community \
+    php7-ctype@community \
+    php7-iconv@community \
+    php7-xml@community \
+    php7-zip@community \
+    php7-xmlreader@community \
+    php7-json@community \
+    php7-xmlwriter@community \
+    php7-fileinfo@community \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-texteditor@community \
