@@ -3,6 +3,14 @@
 # Inspired by https://github.com/psi-4ward/docker-owncloud
 # more than ripped off, i admit
 
+#enable opcache config
+sed -i -e"s/;opcache.enable=.*/opcache.enable=1/" /etc/php7/php.ini
+sed -i -e"s/;opcache.enable_cli=.*/opcache.enable_cli=1/" /etc/php7/php.ini
+sed -i -e"s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=5/" /etc/php7/php.ini
+sed -i -e"s/;opcache.memory_consumption=.*/opcache.memory_consumption=128/" /etc/php7/php.ini
+sed -i -e"s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php7/php.ini
+sed -i -e"s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=1/" /etc/php7/php.ini
+
 # expose config directory
 [ ! -d /media/owncloud/config ] \
       && mkdir -p /media/owncloud/config \
