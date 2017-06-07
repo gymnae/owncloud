@@ -52,10 +52,11 @@ RUN apk-install \
 	nextcloud-texteditor@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
-	#nextcloud-templateeditor@community \
 	nextcloud-doc@community \
 	nextcloud-pdfviewer@community \
 	nextcloud-notifications@community \
+	nextcloud-encryption \
+	nextcloud-logreader \
 	nextcloud-videoplayer@community 
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
