@@ -50,6 +50,9 @@ RUN apk-install \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-doc@community \
+	nextcloud-dav@community \
+	nextcloud-files@community \
+	nextcloud-provisioning_api@community \
 	nextcloud-texteditor@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
