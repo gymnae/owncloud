@@ -49,10 +49,20 @@ RUN apk-install \
     php7-opcache@community \
     #nextcloud packages
 	nextcloud@community \
+	nextcloud-doc@community \
 	nextcloud-texteditor@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
-	nextcloud-doc@community \
+	nextcloud-twofactor_backupcodes@community \
+	nextcloud-default-apps@community \
+	nextcloud-oauth2@community \
+	nextcloud-admin_audit@community \
+	nextcloud-files_trashbin@community \
+	nextcloud-twofactor_backupcodes@community \
+	nextcloud-files_versions@community \
+	nextcloud-files_external@community \
+	nextcloud-workflowengine@community \
+	nextcloud-theming@community \
 	nextcloud-pdfviewer@community \
 	nextcloud-notifications@community \
 	nextcloud-encryption@community \
