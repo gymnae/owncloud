@@ -12,6 +12,9 @@ sed -i -e"s/;opcache.memory_consumption=.*/opcache.memory_consumption=128/" /etc
 sed -i -e"s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php7/php.ini
 sed -i -e"s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=1/" /etc/php7/php.ini
 
+# needed for some apps, which don't set x-frame themselves. potential security risk
+sed -i -e"s/;header('X-Frame-Options: .*/header('X-Frame-Options: ALLOW/" /usr/share/webapps/nextcloud/lib/private/legacy/response.php
+
 # deal with the weird alpine packaging of some nextcloud packages
 ln -s /usr/share/doc/nextcloud/core/doc/ /usr/share/webapps/nextcloud/core/doc
 
