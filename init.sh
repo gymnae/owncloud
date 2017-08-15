@@ -60,6 +60,9 @@ ln -s /media/owncloud/apps /usr/share/webapps/nextcloud/apps2
       && mkdir -p /media/owncloud/logs/owncloud \
       && chown nginx:www-data /media/owncloud/logs/owncloud \
       && chmod 0770 /media/owncloud/logs/owncloud
+      
+# create cronjob for nextcloud
+{ crontab -l -u nginx; echo '*/15  *  *  *  * php -f /usr/share/webapp/nextcloud/cron.php'; } | crontab -u nginx -
 
 # only needed, if you don't have redis as a server  start redis and make it run as deamon
 #mkdir -p /media/owncloud/cache
