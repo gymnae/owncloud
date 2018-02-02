@@ -47,6 +47,7 @@ RUN apk-install \
     php7-xmlwriter@community \
     php7-fileinfo@community \
     php7-opcache@community \
+    php7-apcu@community \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-doc@community \
