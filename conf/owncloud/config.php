@@ -3,7 +3,7 @@ $CONFIG = array(
   'datadirectory' => '/media/owncloud/data',
   'apps_paths' => array (
     0 => array (
-      'path' => OC::$SERVERROOT.'/apps',
+      'path' => /usr/share/webapps/nextcloud/apps',
       'url' => '/apps',
       'writable' => false,
     ),
@@ -13,7 +13,6 @@ $CONFIG = array(
       'writable' => true,
     ),
   ),
-  'version' => '$OWNCLOUDVERSION',
   'dbname' => 'owncloud',
   'dbhost' => 'localhost',
   'dbuser' => 'owncloud',
