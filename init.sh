@@ -1,11 +1,11 @@
 #!/bin/sh
 
 #optimize www.conf of php
-sed -i "s/pm.max_children = .*/pm.max_children = 240/" /etc/php7/php-fpm.d/www.conf
-sed -i "s/pm.start_servers = .*/pm.start_servers = 20/" /etc/php7/php-fpm.d/www.conf
-sed -i "s/pm.min_spare_servers = .*/pm.min_spare_servers = 10/" /etc/php7/php-fpm.d/www.conf
-sed -i "s/pm.max_spare_servers = .*/pm.max_spare_servers = 20/" /etc/php7/php-fpm.d/www.conf
-sed -i "s/;pm.max_requests = 500/pm.max_requests = 500/" /etc/php7/php-fpm.d/www.conf
+sed -i "s/pm.max_children = .*/pm.max_children = 100/" /etc/php7/php-fpm.d/www.conf
+sed -i "s/pm.start_servers = .*/pm.start_servers = 2/" /etc/php7/php-fpm.d/www.conf
+sed -i "s/pm.min_spare_servers = .*/pm.min_spare_servers = 1" /etc/php7/php-fpm.d/www.conf
+sed -i "s/pm.max_spare_servers = .*/pm.max_spare_servers = 5/" /etc/php7/php-fpm.d/www.conf
+sed -i "s/;pm.max_requests = 500/pm.max_requests = 400/" /etc/php7/php-fpm.d/www.conf
 
 # optimize php.ini
 sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php7/php.ini
@@ -23,6 +23,7 @@ sed -i "s/;opcache.interned_strings_buffer=.*/opcache.interned_strings_buffer=8/
 sed -i "s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=10000/" /etc/php7/php.ini
 sed -i "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=1/" /etc/php7/php.ini
 sed -i "s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php7/php.ini
+echo "cgi.fix_pathinfo = 0" >>  /etc/php7/php.ini
 
 # needed for some apps, which don't set x-frame themselves. potential security risk
 #sed -i -e"s/header('X-Frame-Options: .*/header('X-Frame-Options: ALLOW');/" /usr/share/webapps/nextcloud/lib/private/legacy/response.php
