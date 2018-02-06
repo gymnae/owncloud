@@ -12,7 +12,6 @@ sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php7/php.ini
 sed -i "s/max_execution_time =.*/max_execution_time = 1800/" /etc/php7/php.ini
 sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php7/php.ini
 sed -i "s/post_max_size =.*/post_max_size = 4G/" /etc/php7/php.ini
-sed -i "s/;upload_tmp_dir =.*/upload_tmp_dir = \/upload_tmp/" /etc/php7/php.ini
 sed -i "s/upload_max_filesize =.*/upload_max_filesize = 4G/" /etc/php7/php.ini
 sed -i "s/max_file_uploads =.*/max_file_uploads = 100/" /etc/php7/php.ini
 sed -i "s/;date.timezone.*/date.timezone = Europe\/\Berlin/" /etc/php7/php.ini
