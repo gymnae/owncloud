@@ -54,7 +54,7 @@ RUN apk-install \
 	nextcloud-dav@community \
 	nextcloud-files@community \
 	nextcloud-provisioning_api@community \
-	nextcloud-texteditor@community \
+	nextcloud-files_texteditor@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
 	nextcloud-twofactor_backupcodes@community \
@@ -67,11 +67,12 @@ RUN apk-install \
 	nextcloud-files_external@community \
 	nextcloud-workflowengine@community \
 	nextcloud-theming@community \
-	nextcloud-pdfviewer@community \
+	nextcloud-files_pdfviewer@community \
 	nextcloud-notifications@community \
 	nextcloud-encryption@community \
 	nextcloud-logreader@community \
-	nextcloud-videoplayer@community 
+	nextcloud-files_videoplayer@community \
+	nextcloud-files_sharing@communit
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
 RUN pip install gpxpy geojson
