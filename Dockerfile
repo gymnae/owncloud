@@ -72,7 +72,7 @@ RUN apk-install \
 	nextcloud-encryption@community \
 	nextcloud-logreader@community \
 	nextcloud-files_videoplayer@community \
-	nextcloud-files_sharing@communit
+	nextcloud-files_sharing@community
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
 RUN pip install gpxpy geojson
