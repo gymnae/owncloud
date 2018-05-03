@@ -11,6 +11,7 @@ sed -i "s/;pm.max_requests = 500/pm.max_requests = 400/" /etc/php7/php-fpm.d/www
 sed -i "s/output_buffering =.*/output_buffering = Off/" /etc/php7/php.ini
 sed -i "s/max_execution_time =.*/max_execution_time = 1800/" /etc/php7/php.ini
 sed -i "s/max_input_time =.*/max_input_time = 3600/" /etc/php7/php.ini
+sed -i "s/memory_limit =.*/memory_limit = 1G/" /etc/php7/php.ini
 sed -i "s/post_max_size =.*/post_max_size = 4G/" /etc/php7/php.ini
 sed -i "s/upload_max_filesize =.*/upload_max_filesize = 4G/" /etc/php7/php.ini
 sed -i "s/max_file_uploads =.*/max_file_uploads = 100/" /etc/php7/php.ini
@@ -24,6 +25,11 @@ sed -i "s/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=10000/
 sed -i "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=1/" /etc/php7/php.ini
 sed -i "s/;opcache.save_comments=.*/opcache.save_comments=1/" /etc/php7/php.ini
 echo "cgi.fix_pathinfo = 0" >>  /etc/php7/php.ini
+
+#adapt .user.ini
+sed -i "s/upload_max_filesize=.*/upload_max_filesize=4G/" /usr/share/webapps/nextcloud/.user.ini
+sed -i "s/post_max_size=.*/post_max_size=4G/" /usr/share/webapps/nextcloud/.user.ini
+sed -i "s/memory_limit=.*/memory_limit=2G/" /usr/share/webapps/nextcloud/.user.ini
 
 # needed for some apps, which don't set x-frame themselves. potential security risk
 #sed -i -e"s/header('X-Frame-Options: .*/header('X-Frame-Options: ALLOW');/" /usr/share/webapps/nextcloud/lib/private/legacy/response.php
