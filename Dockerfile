@@ -25,7 +25,7 @@ RUN apk-install \
     libpq \
     libxml2 \
     libbz2 \
-    ffmpeg@community \
+    ffmpeg@community 
     musl \ 
     python \
     py2-pip \
@@ -60,7 +60,7 @@ RUN apk-install \
 	#nextcloud-gallery@community \
 	#nextcloud-activity@community \
 	#nextcloud-twofactor_backupcodes@community \
-	#nextcloud-default-apps@community \
+	nextcloud-default-apps@community \
 	#nextcloud-oauth2@community \
 	#nextcloud-admin_audit@community \
 	#nextcloud-files_trashbin@community \
