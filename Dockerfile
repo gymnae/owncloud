@@ -78,7 +78,7 @@ RUN apk-install \
 	nextcloud-federation@community \
 	nextcloud-firstrunwizard@community \
 	nextcloud-lookup_server_connector@community \
-	nextcloud-announcements@community \
+	nextcloud-nextcloud_announcements@community \
 	nextcloud-password_policy@community \
 	nextcloud-serverinfo@community \
 	nextcloud-sharebymail@community \
