@@ -55,12 +55,12 @@ RUN apk-install \
 	#nextcloud-files@community \
 	#nextcloud-accessibility \
 	#nextcloud-support \ 
-	nextcloud-provisioning_api@community
+	nextcloud-provisioning_api@community \
 	#nextcloud-files_texteditor@community \
 	#nextcloud-gallery@community \
 	#nextcloud-activity@community \
 	#nextcloud-twofactor_backupcodes@community \
-	nextcloud-default-apps@community \
+	nextcloud-default-apps@community
 	#nextcloud-oauth2@community \
 	#nextcloud-admin_audit@community \
 	#nextcloud-files_trashbin@community \
