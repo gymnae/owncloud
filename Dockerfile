@@ -55,7 +55,7 @@ RUN apk-install \
 	#nextcloud-files@community \
 	#nextcloud-accessibility \
 	#nextcloud-support \ 
-	nextcloud-provisioning_api@community \
+	nextcloud-provisioning_api@community
 	#nextcloud-files_texteditor@community \
 	#nextcloud-gallery@community \
 	#nextcloud-activity@community \
