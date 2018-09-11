@@ -29,7 +29,6 @@ RUN apk-install \
     musl \ 
     python \
     py2-pip \
-
 # additional php modules
     php7-pdo_pgsql@community \
     php7-posix@community \
@@ -55,6 +54,7 @@ RUN apk-install \
 	nextcloud-dav@community \
 	nextcloud-files@community \
 	nextcloud-accessibility \
+	nextcloud-support \ 
 	nextcloud-provisioning_api@community \
 	nextcloud-files_texteditor@community \
 	nextcloud-gallery@community \
