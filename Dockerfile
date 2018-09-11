@@ -25,7 +25,7 @@ RUN apk-install \
     libpq \
     libxml2 \
     libbz2 \
-    ffmpeg@community 
+    ffmpeg@community \
     musl \ 
     python \
     py2-pip \
