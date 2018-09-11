@@ -75,6 +75,15 @@ RUN apk-install \
 	nextcloud-logreader@community \
 	nextcloud-files_videoplayer@community \
 	nextcloud-comments@community \
+	nextcloud-federation@community \
+	nextcloud-firstrunwizard@community \
+	nextcloud-lookup_server_connector@community \
+	nextcloud-announcements@community \
+	nextcloud-password_policy@community \
+	nextcloud-serverinfo@community \
+	nextcloud-sharebymail@community \
+	nextcloud-survey_client@community \
+	nextcloud-systemtags@community \
 	nextcloud-files_sharing@community
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
