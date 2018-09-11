@@ -50,31 +50,31 @@ RUN apk-install \
     php7-apcu@community \
     #nextcloud packages
 	nextcloud@community \
-	#nextcloud-doc@community \
+	nextcloud-doc@community \
 	nextcloud-dav@community \
-	#nextcloud-files@community \
+	nextcloud-files@community \
 	#nextcloud-accessibility \
 	#nextcloud-support \ 
 	nextcloud-provisioning_api@community \
-	#nextcloud-files_texteditor@community \
-	#nextcloud-gallery@community \
-	#nextcloud-activity@community \
-	#nextcloud-twofactor_backupcodes@community \
-	nextcloud-default-apps@community
-	#nextcloud-oauth2@community \
-	#nextcloud-admin_audit@community \
-	#nextcloud-files_trashbin@community \
-	#nextcloud-twofactor_backupcodes@community \
-	#nextcloud-files_versions@community \
-	#nextcloud-files_external@community \
-	#nextcloud-workflowengine@community \
-	#nextcloud-theming@community \
-	#nextcloud-files_pdfviewer@community \
-	#nextcloud-notifications@community \
-	#nextcloud-encryption@community \
-	#nextcloud-logreader@community \
-	#nextcloud-files_videoplayer@community \
-	#nextcloud-files_sharing@community
+	nextcloud-files_texteditor@community \
+	nextcloud-gallery@community \
+	nextcloud-activity@community \
+	nextcloud-twofactor_backupcodes@community \
+	#nextcloud-default-apps@community
+	nextcloud-oauth2@community \
+	nextcloud-admin_audit@community \
+	nextcloud-files_trashbin@community \
+	nextcloud-twofactor_backupcodes@community \
+	nextcloud-files_versions@community \
+	nextcloud-files_external@community \
+	nextcloud-workflowengine@community \
+	nextcloud-theming@community \
+	nextcloud-files_pdfviewer@community \
+	nextcloud-notifications@community \
+	nextcloud-encryption@community \
+	nextcloud-logreader@community \
+	nextcloud-files_videoplayer@community \
+	nextcloud-files_sharing@community
 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
 RUN pip install gpxpy geojson
