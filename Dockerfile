@@ -48,6 +48,7 @@ RUN apk-install \
     php7-fileinfo@community \
     php7-opcache@community \
     php7-apcu@community \
+    nginx-mod-http-headers-more \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-doc@community \
