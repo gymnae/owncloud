@@ -24,6 +24,8 @@ RUN apk-install \
     libpng \
     libpq \
     libxml2 \
+    imagemagick \
+    imagemagick-libs \
     libbz2 \
     ffmpeg@community \
     musl \ 
@@ -49,6 +51,7 @@ RUN apk-install \
     php7-opcache@community \
     php7-apcu@community \
     nginx-mod-http-headers-more \
+    php7-pecl-imagick \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-doc@community \
