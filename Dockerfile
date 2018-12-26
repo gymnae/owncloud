@@ -62,7 +62,7 @@ RUN apk-install \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
 	nextcloud-twofactor_backupcodes@community \
-	nextcloud-default-apps@community
+	nextcloud-default-apps@community \
 	nextcloud-oauth2@community \
 	nextcloud-admin_audit@community \
 	nextcloud-files_trashbin@community \
