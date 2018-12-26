@@ -59,6 +59,7 @@ RUN apk-install \
 	nextcloud-provisioning_api@community \
 	nextcloud-federation@community \
 	nextcloud-files_texteditor@community \
+	nextcloud-cloud_federation_api@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
 	nextcloud-twofactor_backupcodes@community \
