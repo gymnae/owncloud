@@ -51,7 +51,7 @@ RUN apk-install \
     php7-opcache@community \
     php7-apcu@community \
     nginx-mod-http-headers-more \
-    php7-pecl-imagick \
+    php7-pecl-imagick@community \
     #nextcloud packages
 	nextcloud@community \
 	nextcloud-doc@community \
