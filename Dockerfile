@@ -24,6 +24,7 @@ RUN apk-install \
     libpng \
     libpq \
     libxml2 \
+    librsvg@community \
     imagemagick6 \
     imagemagick6-libs \
     libbz2 \
