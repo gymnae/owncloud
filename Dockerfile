@@ -61,7 +61,7 @@ RUN apk-install \
 	#nextcloud-support \ 
 	nextcloud-provisioning_api@community \
 	nextcloud-federation@community \
-	nextcloud-files_texteditor@community \
+	nextcloud-text@community \
 	nextcloud-cloud_federation_api@community \
 	nextcloud-gallery@community \
 	nextcloud-activity@community \
