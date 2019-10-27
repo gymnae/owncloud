@@ -25,8 +25,8 @@ RUN apk-install \
     libpq \
     libxml2 \
     librsvg@community \
-    imagemagick6 \
-    imagemagick6-libs \
+    imagemagick6@community \
+    imagemagick6-libs@community \
     libbz2 \
     ffmpeg@community \
     musl \ 
