@@ -3,7 +3,7 @@ $CONFIG = array(
   'datadirectory' => '/media/owncloud/data',
   'apps_paths' => array (
     0 => array (
-      'path' => /usr/share/webapps/nextcloud/apps',
+      'path' => '/usr/share/webapps/nextcloud/apps',
       'url' => '/apps',
       'writable' => false,
     ),
