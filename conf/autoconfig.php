@@ -1,4 +1,4 @@
 <?php
-$AUTOCONFIG = array(
-  "directory"     => "/media/owncloud",
-);
+#$AUTOCONFIG = array(
+#  "directory"     => "/media/owncloud",
+#);
