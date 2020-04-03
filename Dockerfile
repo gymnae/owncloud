@@ -13,86 +13,92 @@ FROM gymnae/webserverbase:latest
 
 # add the packages needed and other initial preparations
 
-RUN apk-install \
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories
+RUN apk --no-cache add \ 
     # redis server
   #  redis \
     # server modules
     freetype \    
     libmcrypt \
+    icu-libs \
     libjpeg \
     libltdl \
     libpng \
     libpq \
     libxml2 \
-    librsvg@community \
-    imagemagick6@community \
-    imagemagick6-libs@community \
+    librsvg \
+    imagemagick6 \
+    imagemagick6-libs \
     libbz2 \
-    ffmpeg@community \
+    ffmpeg \
     musl \ 
-    python \
-    py2-pip \
+    python3 \
+    py3-pip \
 # additional php modules
-    php7-pdo_pgsql@community \
-    php7-posix@community \
-    php7-dom@community \
-    php7-ftp@community \
-    php7-exif@community \
-    php7-intl@community \
-    php7-gmp@community \
-    php7-bz2@community \
-    php7-ctype@community \
-    php7-iconv@community \
-    php7-xml@community \
-    php7-zip@community \
-    php7-xmlreader@community \
-    php7-json@community \
-    php7-xmlwriter@community \
-    php7-fileinfo@community \
-    php7-opcache@community \
-    php7-apcu@community \
+    php7-pdo_pgsql \
+    php7-posix \
+    php7-dom \
+    php7-ftp \
+    php7-exif \
+    php7-intl \
+    php7-gmp \
+    php7-bz2 \
+    php7-ctype \
+    php7-iconv \
+    php7-xml \
+    php7-zip \
+    php7-xmlreader \
+    php7-json \
+    php7-xmlwriter \
+    php7-fileinfo \
+    php7-opcache \
+    php7-apcu \
     nginx-mod-http-headers-more \
-    php7-pecl-imagick@community \
+    php7-pecl-imagick \
     #nextcloud packages
-	nextcloud@community \
-	nextcloud-doc@community \
-	nextcloud-dav@community \
-	nextcloud-files@community \
-	nextcloud-accessibility@community \
-	#nextcloud-support \ 
-	nextcloud-provisioning_api@community \
-	nextcloud-federation@community \
-	nextcloud-text@community \
-	nextcloud-cloud_federation_api@community \
-	nextcloud-gallery@community \
-	nextcloud-activity@community \
-	nextcloud-twofactor_backupcodes@community \
-	nextcloud-default-apps@community \
-	nextcloud-oauth2@community \
-	nextcloud-admin_audit@community \
-	nextcloud-files_trashbin@community \
-	nextcloud-twofactor_backupcodes@community \
-	nextcloud-files_versions@community \
-	nextcloud-files_external@community \
-	nextcloud-workflowengine@community \
-	nextcloud-theming@community \
-	nextcloud-files_pdfviewer@community \
-	nextcloud-notifications@community \
-	nextcloud-encryption@community \
-	nextcloud-logreader@community \
-	nextcloud-files_videoplayer@community \
-	nextcloud-comments@community \
-	nextcloud-federation@community \
-	nextcloud-firstrunwizard@community \
-	nextcloud-lookup_server_connector@community \
-	nextcloud-nextcloud_announcements@community \
-	nextcloud-password_policy@community \
-	nextcloud-serverinfo@community \
-	nextcloud-sharebymail@community \
-	nextcloud-survey_client@community \
-	nextcloud-systemtags@community \
-	nextcloud-files_sharing@community
-
+	nextcloud \
+	nextcloud-doc \
+	#nextcloud-dav \
+	#nextcloud-files \
+	nextcloud-accessibility \
+	nextcloud-support \ 
+	#nextcloud-provisioning_api \
+	nextcloud-federation \
+	nextcloud-text \
+	nextcloud-cloud_federation_api \
+	nextcloud-photos \
+	nextcloud-activity \
+	#nextcloud-twofactor_backupcodes \
+	#nextcloud-default-apps \
+	#nextcloud-oauth2 \
+	nextcloud-admin_audit \
+	nextcloud-files_trashbin \
+	nextcloud-files_rightclick \
+        #nextcloud-files_sharing \
+        #nextcloud-twofactor_backupcodes \
+	nextcloud-files_versions \
+	nextcloud-files_external \
+	#nextcloud-workflowengine \
+	nextcloud-theming \
+	nextcloud-files_pdfviewer \
+	nextcloud-notifications \
+	nextcloud-encryption \
+	nextcloud-logreader \
+	nextcloud-files_videoplayer \
+	nextcloud-comments \
+	nextcloud-federation \
+	nextcloud-firstrunwizard \
+	#nextcloud-lookup_server_connector \
+	nextcloud-nextcloud_announcements \
+	nextcloud-password_policy \
+	nextcloud-serverinfo \
+	nextcloud-sharebymail \
+	nextcloud-survey_client \
+	nextcloud-systemtags \
+	nextcloud-files_sharing \
+        nextcloud-viewer \
+        nextcloud-sharebymail \
+        nextcloud-privacy 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
 RUN pip install gpxpy geojson
 
