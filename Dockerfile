@@ -48,6 +48,7 @@ RUN apk --no-cache add \
     php7-ctype \
     php7-iconv \
     php7-xml \
+    php7-fileinfo \
     php7-zip \
     php7-xmlreader \
     php7-json \
@@ -72,7 +73,9 @@ RUN apk --no-cache add \
 	nextcloud-activity \
 	#nextcloud-twofactor_backupcodes \
 	#nextcloud-default-apps \
-	#nextcloud-oauth2 \
+        #nextcloud-settings \
+	nextcloud-recommendations \
+        #nextcloud-oauth2 \
 	nextcloud-admin_audit \
 	nextcloud-files_trashbin \
 	nextcloud-files_rightclick \
