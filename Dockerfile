@@ -32,8 +32,10 @@ RUN apk --no-cache add \
     libbz2 \
     ffmpeg \
     musl \ 
-    python3 \
+    python3 \ 
+    python3-dev \
     py3-pip \
+    build-base \
 # additional php modules
     php7-pdo_pgsql \
     php7-posix \
@@ -100,7 +102,7 @@ RUN apk --no-cache add \
         nextcloud-sharebymail \
         nextcloud-privacy 
 # install pythong pips for geolocation of gpx files for nextcloud app gpxpod
-RUN pip install gpxpy geojson
+RUN pip3 install gpxpy geojson
 
 # make folders
 RUN mkdir -pv /etc/nginx/sites-enabled/
