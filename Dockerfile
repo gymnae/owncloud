@@ -13,11 +13,11 @@ FROM gymnae/webserverbase:latest
 
 # add the packages needed and other initial preparations
 
-RUN	echo @nc http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories \ 
+RUN	echo @nc http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories
 #	&& echo @community http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories
 #	&& echo http://dl-cdn.alpinelinux.org/alpine/latest-stable/main | tee -a /etc/apk/repositories2 \
 #	&& echo http://dl-cdn.alpinelinux.org/alpine/latest-stable/community | tee -a /etc/apk/repositories2 \
-RUN apk --no-cache --repositories-file /etc/apk/repositories2 add \ 
+RUN apk --no-cache add \ 
     # redis servery
     #  redis \
     # server modules
