@@ -13,12 +13,10 @@ FROM gymnae/webserverbase:latest
 
 # add the packages needed and other initial preparations
 
-RUN 	echo rm /etc/apk/repositories
 RUN	echo @nc http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories2 \ 
 #	&& echo @community http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories
 	&& echo http://dl-cdn.alpinelinux.org/alpine/latest-stable/main | tee -a /etc/apk/repositories2 \
 	&& echo http://dl-cdn.alpinelinux.org/alpine/latest-stable/community | tee -a /etc/apk/repositories2 \
-	&& echo @php http://dl-cdn.alpinelinux.org/alpine/latest-stable/community | tee -a /etc/apk/repositories2
 RUN apk --no-cache --repositories-file /etc/apk/repositories2 add \ 
     # redis servery
     #  redis \
@@ -49,38 +47,38 @@ RUN apk --no-cache --repositories-file /etc/apk/repositories2 add \
 	nginx-mod-http-cache-purge \
 	nginx-mod-http-fancyindex \
 	nginx-mod-rtmp \
-	php7-openssl@php \
+	php7-openssl \
 	#php7-cli@testing \
-	php7-curl@php \
-        php7@php \
-	php7-fpm@php \
-	php7-gd@php \
-	php7-redis@php \
+	php7-curl \
+        php7 \
+	php7-fpm \
+	php7-gd \
+	php7-redis \
 	libmaxminddb \
-        php7-pdo_mysql@php \
-        php7-pgsql@php \
-        php7-sqlite3@php \      
-    php7-pdo_pgsql@php \
-    php7-posix@php \
-    php7-dom@php \
-    php7-ftp@php \
-    php7-exif@php \
-    php7-intl@php \
-    php7-gmp@php \
-    php7-bz2@php \
-    php7-ctype@php \
-    php7-iconv@php \
-    php7-xml@php \
-    php7-fileinfo@php \
-    php7-zip@php \
-    php7-xmlreader@php \
-    php7-json@php \
-    php7-xmlwriter@php \
-    php7-fileinfo@php \
-    php7-opcache@php \
-    php7-apcu@php \
-    nginx-mod-http-headers-more@nc \
-    php7-pecl-imagick@php \
+        php7-pdo_mysql \
+        php7-pgsql \
+        php7-sqlite3 \      
+    php7-pdo_pgsql \
+    php7-posix \
+    php7-dom \
+    php7-ftp \
+    php7-exif \
+    php7-intl \
+    php7-gmp \
+    php7-bz2 \
+    php7-ctype \
+    php7-iconv \
+    php7-xml \
+    php7-fileinfo \
+    php7-zip \
+    php7-xmlreader \
+    php7-json \
+    php7-xmlwriter \
+    php7-fileinfo \
+    php7-opcache \
+    php7-apcu \
+    nginx-mod-http-headers-more \
+    php7-pecl-imagick \
     #nextcloud packages
 	nextcloud@nc \
 	nextcloud-doc@nc \
