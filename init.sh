@@ -34,6 +34,9 @@ sed -i "s/memory_limit=.*/memory_limit=2G/" /usr/share/webapps/nextcloud/.user.i
 # needed for some apps, which don't set x-frame themselves. potential security risk
 #sed -i -e"s/header('X-Frame-Options: .*/header('X-Frame-Options: ALLOW');/" /usr/share/webapps/nextcloud/lib/private/legacy/response.php
 
+# allow for X-Frame embedding on grundstil.de
+sed -i "s/FrameAncestors.*/&\n                'grundstil.de',/" /usr/share/webapps/nextcloud/lib/public/AppFramework/Http/ContentSecurityPolicy.php
+
 # deal with the weird alpine packaging of some nextcloud packages
 ln -s /usr/share/doc/nextcloud/core/doc/ /usr/share/webapps/nextcloud/core/doc
 
