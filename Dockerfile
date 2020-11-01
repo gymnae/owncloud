@@ -93,13 +93,15 @@ RUN apk --no-cache add \
 	nextcloud-photos@nc \
 	nextcloud-activity@nc \
 	#nextcloud-twofactor_backupcodes \
-	#nextcloud-default-apps \
+	nextcloud-dashboard@nc \
+	nextcloud-default-apps@n \
         #nextcloud-settings \
 	nextcloud-recommendations@nc \
         #nextcloud-oauth2 \
 	nextcloud-admin_audit@nc \
 	nextcloud-files_trashbin@nc \
 	nextcloud-files_rightclick@nc \
+	nextcloud-weather_status@nc \
         #nextcloud-files_sharing \
         #nextcloud-twofactor_backupcodes \
 	nextcloud-files_versions@nc \
