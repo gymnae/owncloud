@@ -94,7 +94,7 @@ RUN apk --no-cache add \
 	nextcloud-activity@nc \
 	#nextcloud-twofactor_backupcodes \
 	nextcloud-dashboard@nc \
-	nextcloud-default-apps@n \
+	nextcloud-default-apps@nc \
         #nextcloud-settings \
 	nextcloud-recommendations@nc \
         #nextcloud-oauth2 \
