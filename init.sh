@@ -79,6 +79,13 @@ ln -s /media/owncloud/apps /usr/share/webapps/nextcloud/apps2
       && chown nginx:www-data /media/owncloud/logs/owncloud \
       && chmod 0770 /media/owncloud/logs/owncloud
       
+# correct access rights
+chown -R nginx:www-data /usr/share/webapps/nextcloud
+find /usr/share/webapps/nextcloud/apps/ -type f -exec chmod 640 {} \;
+find /usr/share/webapps/nextcloud/apps/ -type d -exec chmod 750 {} \;
+find /usr/share/webapps/nextcloud/apps2/ -type f -exec chmod 640 {} \;
+find /usr/share/webapps/nextcloud/apps2/ -type d -exec chmod 750 {} \;
+      
 # create cronjob for nextcloud and run crond
 (crontab -u nginx -l; echo "*/15  *  *  *  * php -f /usr/share/webapps/nextcloud/cron.php") | crontab -u nginx -
 crond -b -l 0 -L /var/log/cron.log
