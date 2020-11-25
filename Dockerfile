@@ -153,4 +153,4 @@ COPY conf/autoconfig.php /tmp/
 ADD init.sh /init.sh
 RUN chmod +x /init.sh
 
-CMD ["/init.sh"]
+CMD ["/init.sh"] 
