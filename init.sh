@@ -98,6 +98,10 @@ crond -b -l 0 -L /var/log/cron.log
 mkdir -p /media/owncloud/logs/php-fpm
 php-fpm7
 
+# because alpine installs into /usr/share/webapps/nextcloud but
+# i want to always have a fresh copy on my bind mounted folder
+# on host, i move all files and then start
+
 # start nginx
 mkdir -p /media/owncloud/logs/nginx
 mkdir -p /tmp/nginx
