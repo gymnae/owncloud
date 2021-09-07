@@ -10,4 +10,4 @@ jobs:
       with:
         name: Gymnae/owncloud
         username: ${{ secrets.gymnae }}
-        password: ${{ secrets.7dcf65d8-a755-4aac-b772-59f1d5a8e4d5 }}
+        password: ${{ secrets.}}
