@@ -1,5 +1,10 @@
 name: Publish Docker
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,3 +16,4 @@ jobs:
         name: Gymnae/owncloud
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        cache: ${{ github.event_name != 'schedule' }}
