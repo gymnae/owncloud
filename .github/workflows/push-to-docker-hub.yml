@@ -1,2 +1,13 @@
-- name: Publish Docker
-  uses: elgohr/Publish-Docker-Github-Action@3.04
+name: Publish Docker
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: Gymnae/owncloud
+        username: ${{ secrets.gymnae }}
+        password: ${{ secrets.7dcf65d8-a755-4aac-b772-59f1d5a8e4d5 }}
