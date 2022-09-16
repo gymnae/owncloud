@@ -11,6 +11,8 @@ RUN set -ex; \
 #       libreoffice \
     ;
 
+ENV PHP_PM_MAX_CHILDREN 16
+
 RUN set -ex; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -43,7 +45,13 @@ RUN mkdir -p \
     /var/log/supervisord \
     /var/run/supervisord \
 ;
-
+    { \
+        echo 'memory_limit=${PHP_MEMORY_LIMIT}'; \
+        echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
+        echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
+        echo 'pm.max_children = ${PHP_PM_MAX_CHILDREN}'; \
+    } > "${PHP_INI_DIR}/conf.d/nextcloud.ini"; \
+    
 COPY supervisord.conf /
 
 ENV NEXTCLOUD_UPDATE=1
