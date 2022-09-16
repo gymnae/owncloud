@@ -46,10 +46,9 @@ RUN mkdir -p \
     /var/run/supervisord \
 ;
 RUN { \
-        echo 'memory_limit=${PHP_MEMORY_LIMIT}'; \
-        echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
-        echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
-        echo 'pm.max_children=${PHP_PM_MAX_CHILDREN}'; \
+        echo 'memory_limit=8G'; \
+        echo 'upload_max_filesize=8G'; \
+        echo 'pm.max_children=25'; \
     } > "${PHP_INI_DIR}/conf.d/nextcloud.ini";
     
 COPY supervisord.conf /
