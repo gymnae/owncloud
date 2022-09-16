@@ -45,7 +45,7 @@ RUN mkdir -p \
     /var/log/supervisord \
     /var/run/supervisord \
 ;
-    { \
+RUN { \
         echo 'memory_limit=${PHP_MEMORY_LIMIT}'; \
         echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
         echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
