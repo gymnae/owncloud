@@ -50,7 +50,7 @@ RUN { \
         echo 'upload_max_filesize=${PHP_UPLOAD_LIMIT}'; \
         echo 'post_max_size=${PHP_UPLOAD_LIMIT}'; \
         echo 'pm.max_children = ${PHP_PM_MAX_CHILDREN}'; \
-    } > "${PHP_INI_DIR}/conf.d/nextcloud.ini"; \
+    } > "${PHP_INI_DIR}/conf.d/nextcloud.ini";
     
 COPY supervisord.conf /
 
