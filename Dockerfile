@@ -6,13 +6,18 @@ RUN set -ex; \
     apt-get install -y --no-install-recommends \
         ffmpeg \
         imagemagick \
+        $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
         samba-client \
         supervisor \
     ; \
     rm -rf /var/lib/apt/lists/*;
 
-ENV PHP_PM_MAX_CHILDREN 16
+RUN set -ex; \
+	apt-get clean autoclean \
+	&& apt-get autoremove --yes
+
+ENV PHP_PM_MAX_CHILDREN 25
 
 RUN { \
         echo 'memory_limit=8G'; \
