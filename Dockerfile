@@ -25,7 +25,7 @@ RUN { \
         echo 'pm.max_children=25'; \
     } > "${PHP_INI_DIR}/conf.d/nextcloud.ini";
 
-RUN sed -i "s/pm.max_children = .*/pm.max_children = 100/" /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i "s/pm.max_children = .*/pm.max_children = 25/" /usr/local/etc/php-fpm.d/www.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]
