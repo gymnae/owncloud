@@ -9,7 +9,6 @@ RUN set -ex; \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
         samba-client \
-        supervisor \
     ; \
     rm -rf /var/lib/apt/lists/*;
 
@@ -25,7 +24,8 @@ RUN { \
         echo 'pm.max_children=25'; \
     } > "${PHP_INI_DIR}/conf.d/nextcloud.ini";
 
-RUN sed -i "s/pm.max_children = .*/pm.max_children = 25/" /usr/local/etc/php-fpm.d/www.conf
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
+ENV NEXTCLOUD_UPDATE=1
+COPY php-optimize.sh /
+RUN chmod a+x /*.sh
+WORKDIR /
+CMD ["/bin/bash", "-c", "source /php-optimize.sh php-fpm"]
