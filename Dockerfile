@@ -25,7 +25,7 @@ RUN { \
     } > "${PHP_INI_DIR}/conf.d/nextcloud.ini";
 
 ENV NEXTCLOUD_UPDATE=1
-COPY php-optimize.sh /
+COPY tweaks.sh /
 RUN chmod a+x /*.sh
 WORKDIR /
-CMD ["/bin/bash", "-c", "source /php-optimize.sh php-fpm"]
+CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
