@@ -27,5 +27,4 @@ RUN { \
 ENV NEXTCLOUD_UPDATE=1
 COPY tweaks.sh /
 RUN chmod a+x /*.sh
-WORKDIR /
 CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
