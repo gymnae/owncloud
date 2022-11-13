@@ -6,7 +6,7 @@ php-fpm &
 sleep 2
 
 # make the following commands not fail the script if they fail
-set +
+set +e
 
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
 AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
