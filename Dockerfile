@@ -8,6 +8,7 @@ RUN set -ex; \
         imagemagick \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
+	nano \
         samba-client \
     ; \
     rm -rf /var/lib/apt/lists/*;
