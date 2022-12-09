@@ -19,7 +19,7 @@ jobs:
           base-image: nextcloud:latest
           image: gymnae/owncloud:latest
         if: ${{ github.event_name == 'schedule' }}
- build:
+  build:
     needs: check
     if: ${{ github.event_name != 'schedule' || needs.check.outputs.image-needs-updating == 'true' }}
     runs-on: ubuntu-latest
