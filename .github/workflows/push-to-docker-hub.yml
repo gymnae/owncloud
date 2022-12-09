@@ -7,7 +7,21 @@ on:
   schedule:
     - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
 jobs:
-  build:
+  checks:
+    runs-on: ubuntu-latest
+    outputs:
+      image-needs-updating: ${{ steps.check.outputs.needs-updating }}
+    steps:
+      - name: Docker Image Update Checker
+        id: check
+        uses: lucacome/docker-image-update-checker@v1
+        with:
+          base-image: nextcloud:latest
+          image: gymnae/owncloud:latest
+        if: ${{ github.event_name == 'schedule' }}
+ build:
+    needs: check
+    if: ${{ github.event_name != 'schedule' || needs.check.outputs.image-needs-updating == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
