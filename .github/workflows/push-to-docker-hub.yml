@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
 jobs:
-  checks:
+  check:
     runs-on: ubuntu-latest
     outputs:
       image-needs-updating: ${{ steps.check.outputs.needs-updating }}
