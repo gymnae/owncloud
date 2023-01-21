@@ -1,5 +1,4 @@
 FROM nextcloud:25-fpm
-
 RUN set -ex; \
     \
     apt-get update; \
