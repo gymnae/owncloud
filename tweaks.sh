@@ -29,13 +29,15 @@ sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local
 
 pkill php-fpm
 
+## hacks below commented out because nextcloud internal encryption is deactivated and replaced with rclone
+## mounting an encrypted share
 # add hacks to enable preview generation and proper cron jobs even if encryption is enabled
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/previewgenerator/lib/Command/PreGenerate.php
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/previewgenerator/lib/Command/Generate.php
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/memories/lib/Command/Index.php
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/PreGenerate.php
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/Generate.php
-sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/memories/lib/Command/Index.php
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/previewgenerator/lib/Command/PreGenerate.php
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/previewgenerator/lib/Command/Generate.php
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/custom_apps/memories/lib/Command/Index.php
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/PreGenerate.php
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/Generate.php#
+# sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/memories/lib/Command/Index.php
 
 
 exec "$@"
