@@ -2,16 +2,16 @@ FROM nextcloud:26-fpm
     
 RUN set -ex; \
     \
-    apt-get update; \
-    apt-get install -y --no-install-recommends \
+    apt update; \
+    apt install -y --no-install-recommends \
         imagemagick \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
 	    nano \
         wget \
         samba-client \
-    ; \
-    rm -rf /var/lib/apt/lists/*;
+    ; 
+   # rm -rf /var/lib/apt/lists/*;
 
 RUN mkdir -p /tmp/ffmpeg \
     && cd /tmp/ffmpeg \
