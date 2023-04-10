@@ -17,7 +17,9 @@ RUN mkdir -p /tmp/ffmpeg \
     && cd /tmp/ffmpeg \
     && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/latest | grep "browser_download_url.*bullseye_amd64.deb" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
     && apt install -y --fix-broken /tmp/ffmpeg/*.deb \
-    && cd / 
+    && cd / \
+    && ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin \
+    && ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin
 
 RUN set -ex; \
 	apt-get clean autoclean \
