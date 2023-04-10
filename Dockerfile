@@ -16,8 +16,7 @@ RUN set -ex; \
 RUN mkdir -p /tmp/ffmpeg \
     && cd /tmp/ffmpeg \
     && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/latest | grep "browser_download_url.*bullseye_amd64.deb" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
-    && rm *.sha256sum \
-    && dpkg -i * \
+    && apt install --fix-broken *.deb \
     && cd / 
 
 RUN set -ex; \
