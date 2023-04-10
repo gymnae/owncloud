@@ -1,9 +1,15 @@
 FROM nextcloud:26-fpm
+
+# Enable QSV support
+SHELL ["/bin/bash", "-c"]
+COPY installffmpeg.sh /
+RUN chmod a+x /*.sh
+RUN installffmpeg.sh
+    
 RUN set -ex; \
     \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        ffmpeg \
         imagemagick \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
