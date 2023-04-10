@@ -1,10 +1,4 @@
 FROM nextcloud:26-fpm
-
-# Enable QSV support
-SHELL ["/bin/bash", "-c"]
-COPY installffmpeg.sh /
-RUN chmod a+x /*.sh
-RUN installffmpeg.sh
     
 RUN set -ex; \
     \
@@ -13,10 +7,18 @@ RUN set -ex; \
         imagemagick \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
-	nano \
+	    nano \
+        wget \
         samba-client \
     ; \
     rm -rf /var/lib/apt/lists/*;
+
+RUN mkdir -p /tmp/ffmpeg \
+    && cd /tmp/ffmpeg \
+    && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/latest | grep "browser_download_url.*bullseye_amd64.deb" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
+    && rm *.sha256sum \
+    && dpkg -i * \
+    && cd / 
 
 RUN set -ex; \
 	apt-get clean autoclean \
