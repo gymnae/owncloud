@@ -13,13 +13,13 @@ RUN set -ex; \
     ; 
    # rm -rf /var/lib/apt/lists/*;
 
-RUN mkdir -p /tmp/ffmpeg \
-    && cd /tmp/ffmpeg \
-    && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/latest | grep "browser_download_url.*bullseye_amd64.deb" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
-    && apt install -y --fix-broken /tmp/ffmpeg/*.deb \
+RUN mkdir -p /opt/ffmpeg \
+    && cd /opt/ffmpeg \
+    && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/latest | grep "browser_download_url.*linux64-gpl.tar.xz" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
+    && tar -xvf *linux64-gpl.tar.xz \
     && cd / \
-    && ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin \
-    && ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin
+    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
+    && ln -s /opt/ffmpeg/ffprobe /usr/bin
 
 RUN set -ex; \
 	apt-get clean autoclean \
