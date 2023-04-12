@@ -28,13 +28,7 @@ sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
 
 # server tuning according to https://docs.nextcloud.com/server/26/admin_manual/installation/server_tuning.html#enable-php-opcache
-echo 'opcache.revalidate_freq = 60' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
-echo 'opcache.jit = 1255' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
-echo 'opcache.jit_buffer_size = 512M' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
-
-echo 'opcache.revalidate_freq = 60' >> /usr/local/etc/php-fpm.d/www.conf
-echo 'opcache.jit = 1255' >> /usr/local/etc/php-fpm.d/www.conf
-echo 'opcache.jit_buffer_size = 512M' >> /usr/local/etc/php-fpm.d/www.conf
+sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 
 pkill php-fpm
 
