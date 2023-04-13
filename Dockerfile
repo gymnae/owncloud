@@ -15,9 +15,7 @@ RUN set -ex; \
 
 RUN mkdir -p /opt/ffmpeg \
     && cd /opt/ffmpeg \
-    && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/tags/v6.0-1 | grep 
-"browser_download_url.*linux64-gpl.tar.xz" 
-| cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
+    && owner_repo='jellyfin/jellyfin-ffmpeg'; latest_version_url="$(curl -s https://api.github.com/repos/$owner_repo/releases/tags/v6.0-1 | grep "browser_download_url.*linux64-gpl.tar.xz" | cut -d : -f 2,3 | tr -d \")"; echo $latest_version_url; basename $latest_version_url ; wget --content-disposition $latest_version_url \
     && tar -xvf *linux64-gpl.tar.xz \
     && cd / \
     && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
