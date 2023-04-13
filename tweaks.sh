@@ -9,7 +9,8 @@ sleep 2
 set +e
 
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
-AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
+AvailableRAM=$memory
+#AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
 FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
@@ -26,6 +27,12 @@ sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm
 sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
+
+# add values to env to make them surely stick
+export PHP_PM_MAX_CHILDREN=$FPMS
+export PHP_MEMORY_LIMIT=$memory
+export PHP_UPLOAD_LIMIT=$memory
+
 
 # server tuning according to https://docs.nextcloud.com/server/26/admin_manual/installation/server_tuning.html#enable-php-opcache
 sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
