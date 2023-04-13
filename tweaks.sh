@@ -9,8 +9,7 @@ sleep 2
 set +e
 
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
-AvailableRAM=$memory
-#AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
+AvailableRAM=$(cat /sys/fs/cgroup/memory.max)
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
 FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
@@ -32,8 +31,8 @@ sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local
 
 # add values to env to make them surely stick
 export PHP_PM_MAX_CHILDREN=$FPMS
-export PHP_MEMORY_LIMIT=$memory
-export PHP_UPLOAD_LIMIT=$memory
+export PHP_MEMORY_LIMIT=$AvailableRAM
+export PHP_UPLOAD_LIMIT=$AvailableRAM
 
 
 # server tuning according to https://docs.nextcloud.com/server/26/admin_manual/installation/server_tuning.html#enable-php-opcache
