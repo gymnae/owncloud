@@ -43,11 +43,11 @@ sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=512M/' ${PHP_INI_D
 # tune the postgreSQL php config
 echo "
 pgsql.allow_persistent = On
-pgsql.auto_reset_persistent = On
+pgsql.auto_reset_persistent = Off
 pgsql.max_persistent = -1
 pgsql.max_links = -1
 pgsql.ignore_notice = 1
-pgsql.log_notice = 0"  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
+pgsql.log_notice = 1  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 
 pkill php-fpm
 
