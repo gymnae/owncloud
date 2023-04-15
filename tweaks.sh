@@ -37,8 +37,8 @@ export PHP_UPLOAD_LIMIT=$AvailableRAM
 
 
 # server tuning according to https://docs.nextcloud.com/server/26/admin_manual/installation/server_tuning.html#enable-php-opcache
-sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
-
+sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=256M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
+sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 
 # tune the postgreSQL php config
 echo "
