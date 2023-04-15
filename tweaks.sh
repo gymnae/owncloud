@@ -44,8 +44,8 @@ sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP
 echo "
 pgsql.allow_persistent = On
 pgsql.auto_reset_persistent = On
-pgsql.max_persistent = 100
-pgsql.max_links = 100
+pgsql.max_persistent = 150
+pgsql.max_links = 150
 pgsql.ignore_notice = 1
 pgsql.log_notice = 1"  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 
