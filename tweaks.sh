@@ -24,11 +24,13 @@ echo 'pm.max_spare_servers='"$PMaxSS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/memory_limit=.*/memory_limit='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/upload_max_filesize=.*/upload_max_filesize='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+echo 'session.cookie_samesite="None"' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 
 sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
+echo 'session.cookie_samesite="None"' >> /usr/local/etc/php-fpm.d/www.conf
 
 ## attempt to force nextcloud to create cookies with SameSite=none instead of Lax for SSO reasons
 # sed -i "s/'samesite' => .*/'samesite' => 'None',/g" /var/www/html/lib/private/Session/CryptoWrapper.php
