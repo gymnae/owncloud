@@ -31,8 +31,8 @@ sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
 
 # attempt to force nextcloud to create cookies with SameSite=none instead of Lax for SSO reasons
-sed -i 's/samesite' => .*/samesite' => "None"/' /var/www/html/lib/private/Session/CryptoWrapper.php
-sed -i 's/cookie_samesite' => .*/cookie_samesite' => 'None'/' /var/www/html/lib/private/Session/Internal.php
+sed -i "s,'samesite' => .*,'samesite' => 'None',g" /var/www/html/lib/private/Session/CryptoWrapper.php
+sed -i "s/cookie_samesite' => .*/cookie_samesite' => 'None'/" /var/www/html/lib/private/Session/Internal.php
 
 # add values to env to make them surely stick
 export PHP_PM_MAX_CHILDREN=$FPMS
