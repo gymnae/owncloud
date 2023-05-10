@@ -48,9 +48,7 @@ sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP
 
 # tune the postgreSQL php config
 rm ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
-echo "
-extension=pdo_pgsql.so
-extension=pgsql.so
+echo "extension=pdo_pgsql.so
 
 [PostgresSQL]
 pgsql.allow_persistent = On
@@ -60,6 +58,14 @@ pgsql.max_links = -1
 pgsql.ignore_notice = 0
 pgsql.log_notice = 0"  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 
+# use redis for session locking
+# requires redis to be installed and configured to offer unix socket
+# requires unix socket to be mounted in nextcloud container
+echo 'redis.session.locking_enabled=1
+redis.session.lock_retries=-1
+redis.session.lock_wait_time=10000
+session.save_handler = redis
+session.save_path = "unix:///run/redis-socket/redis.sock?persistent=1&weight=1&database=0"' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-redis.ini
 pkill php-fpm
 
 ## hacks below commented out because nextcloud internal encryption is deactivated and replaced with rclone
