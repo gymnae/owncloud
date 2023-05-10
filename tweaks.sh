@@ -47,7 +47,12 @@ sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=256M/' ${PHP_INI_D
 sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 
 # tune the postgreSQL php config
+rm ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 echo "
+extension=pdo_pgsql.so
+extension=pgsql.so
+
+[PostgresSQL]
 pgsql.allow_persistent = On
 pgsql.auto_reset_persistent = Off
 pgsql.max_persistent = -1
