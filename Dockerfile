@@ -29,5 +29,8 @@ ENV NEXTCLOUD_UPDATE=1
 COPY tweaks.sh /
 COPY healthcheck.sh /
 RUN chmod a+x /*.sh
-HEALTHCHECK CMD sudo -E -u www-data bash /healthcheck.sh
+HEALTHCHECK --interval=60s --timeout=10s --start_period=20s  \
+  CMD SCRIPT_NAME=/var/www/html/status.php SCRIPT_FILENAME=/var/www/html/status.php \
+  REQUEST_METHOD=GET /usr/bin/cgi-fcgi -connect /var/run/php-fpm/php-fpm.sock / | \
+  grep '\"installed\":true' | grep '\"maintenance\":false' | grep '\"needsDbUpgrade\":false' || exit 1
 CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
