@@ -5,9 +5,10 @@ RUN set -ex; \
     apt update; \
     apt install -y --no-install-recommends \
         imagemagick \
+	libfcgi-bin \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
-	    nano \
+	nano \
         wget \
         samba-client \
     ; 
@@ -27,9 +28,8 @@ RUN set -ex; \
 
 ENV NEXTCLOUD_UPDATE=1
 COPY tweaks.sh /
-COPY healthcheck.sh /
 RUN chmod a+x /*.sh
-HEALTHCHECK --interval=60s --timeout=10s --start_period=20s  \
+HEALTHCHECK --interval=60s --timeout=10s --start-period=20s  \
   CMD SCRIPT_NAME=/var/www/html/status.php SCRIPT_FILENAME=/var/www/html/status.php \
   REQUEST_METHOD=GET /usr/bin/cgi-fcgi -connect /var/run/php-fpm/php-fpm.sock / | \
   grep '\"installed\":true' | grep '\"maintenance\":false' | grep '\"needsDbUpgrade\":false' || exit 1
