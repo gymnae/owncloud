@@ -27,5 +27,7 @@ RUN set -ex; \
 
 ENV NEXTCLOUD_UPDATE=1
 COPY tweaks.sh /
+COPY healthcheck.sh /
 RUN chmod a+x /*.sh
+HEALTHCHECK CMD sudo -E -u www-data bash /healthcheck.sh
 CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
