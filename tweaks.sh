@@ -58,9 +58,9 @@ echo "extension=pdo_pgsql.so
 
 [PostgresSQL]
 pgsql.allow_persistent = On
-pgsql.auto_reset_persistent = Off
-pgsql.max_persistent = 290
-pgsql.max_links = -1
+pgsql.auto_reset_persistent = On
+pgsql.max_persistent = 20
+pgsql.max_links = 20
 pgsql.ignore_notice = 0
 pgsql.log_notice = 0"  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 
