@@ -25,11 +25,14 @@ sed -i 's/memory_limit=.*/memory_limit='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.
 sed -i 's/upload_max_filesize=.*/upload_max_filesize='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 #echo 'session.cookie_samesite="None"' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
+# no output compression because I compress via reverse proxy
+echo 'zlib.output_compression=Off' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 
 sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
+sed -i 's/pm.max_requests =.*/;pm.max_requests = 100/' /usr/local/etc/php-fpm.d/www.conf
 #echo 'php_admin_value[session.cookie_samesite] = "None"' >> /usr/local/etc/php-fpm.d/www.conf
 
 ## attempt to force nextcloud to create cookies with SameSite=none instead of Lax for SSO reasons
