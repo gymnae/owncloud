@@ -58,7 +58,7 @@ echo "extension=pdo_pgsql.so
 
 [PostgresSQL]
 pgsql.allow_persistent = On
-pgsql.auto_reset_persistent = On
+pgsql.auto_reset_persistent = Off
 pgsql.max_persistent = 20
 pgsql.max_links = 20
 pgsql.ignore_notice = 0
