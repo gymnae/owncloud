@@ -32,7 +32,6 @@ sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm
 sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
-sed -i 's/pm.max_requests =.*/;pm.max_requests = 100/' /usr/local/etc/php-fpm.d/www.conf
 #echo 'php_admin_value[session.cookie_samesite] = "None"' >> /usr/local/etc/php-fpm.d/www.conf
 
 ## attempt to force nextcloud to create cookies with SameSite=none instead of Lax for SSO reasons
@@ -62,8 +61,8 @@ echo "extension=pdo_pgsql.so
 [PostgresSQL]
 pgsql.allow_persistent = On
 pgsql.auto_reset_persistent = Off
-pgsql.max_persistent = 2
-pgsql.max_links = 2
+pgsql.max_persistent = 1
+pgsql.max_links = 1
 pgsql.ignore_notice = 0
 pgsql.log_notice = 0"  >> ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
 
