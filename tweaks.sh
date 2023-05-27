@@ -17,7 +17,10 @@ PMinSS=$((PMaxSS/2))
 StartS=$(((PMaxSS+PMinSS)/2))
 
 # sed results into two locations, because i don't know which one stick
-sed -i 's/pm.max_children=.*/pm.max_children='$FPMS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+
+sed -i 's/pm =.*/pm = static/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+sed -i 's/pm.max_children =.*/pm.max_children = 200/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+# sed -i 's/pm.max_children=.*/pm.max_children='$FPMS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 echo 'pm.start_servers='"$StartS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 echo 'pm.min_spare_servers='"$PMinSS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 echo 'pm.max_spare_servers='"$PMaxSS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
@@ -28,7 +31,9 @@ sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/con
 # no output compression because I compress via reverse proxy
 echo 'zlib.output_compression=Off' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 
-sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
+sed -i 's/pm =.*/pm = static/' /usr/local/etc/php-fpm.d/www.conf
+sed -i 's/pm.max_children =.*/pm.max_children = '200'/' /usr/local/etc/php-fpm.d/www.conf
+# sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
 sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
