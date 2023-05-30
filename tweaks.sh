@@ -1,17 +1,13 @@
 #!/bin/bash
 
-# start php-fpm in the background to be able to determine "optimal" settings
-
-php-fpm &
-sleep 5
-
 # make the following commands not fail the script if they fail
 set +e
 
+# start with a fixed amount of max children, then collect data for 24hrs to adjust to a good setting later
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
 AvailableRAM=$(awk -v foo=$(cat /sys/fs/cgroup/memory.max) -v bar=1024 'BEGIN { print $1foo/bar/bar  }')
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
-FPMS=100
+FPMS=50
 #FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
 PMinSS=$((PMaxSS/2))
@@ -19,7 +15,7 @@ StartS=$(((PMaxSS+PMinSS)/2))
 
 # sed results into two locations, because i don't know which one stick
 
-sed -i 's/pm =.*/pm = static/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+sed -i 's/pm=.*/pm=static/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/pm.max_children=.*/pm.max_children='$FPMS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 echo 'pm.start_servers='"$StartS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 echo 'pm.min_spare_servers='"$PMinSS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
@@ -27,7 +23,6 @@ echo 'pm.max_spare_servers='"$PMaxSS" >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/memory_limit=.*/memory_limit='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/upload_max_filesize=.*/upload_max_filesize='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
 sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
-#echo 'session.cookie_samesite="None"' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 # no output compression because I compress via reverse proxy
 echo 'zlib.output_compression=Off' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 # static because I fix the max children to a number for now
@@ -92,5 +87,38 @@ pkill php-fpm
 # sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/Generate.php#
 # sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/memories/lib/Command/Index.php
 
+
+# Start a subshell or background shell
+(
+  # Sleep for 24 hours
+  sleep 86400
+  # Second set of commands
+  echo "Running second set of commands 24 hours later"
+  # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
+  AvailableRAM=$(awk -v foo=$(cat /sys/fs/cgroup/memory.max) -v bar=1024 'BEGIN { print $1foo/bar/bar  }')
+  AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
+  FPMS=$((AvailableRAM/AverageFPM))
+  PMaxSS=$((FPMS*2/3))
+  PMinSS=$((PMaxSS/2))
+  StartS=$(((PMaxSS+PMinSS)/2))
+  sed -i 's/pm.max_children=.*/pm.max_children='$FPMS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/pm.start_servers=.*/pm.start_servers='$StartS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/pm.min_spare_servers=.*/pm.min_spare_servers='$PMinSS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/pm.max_spare_servers=.*/pm.max_spare_servers='$PMaxSS'/' /${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
+  sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
+  sed -i 's/memory_limit=.*/memory_limit='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/upload_max_filesize=.*/upload_max_filesize='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
+  sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
+  sed -i 's/pm.start_servers =.*/pm.start_servers = '$StartS'/' /usr/local/etc/php-fpm.d/www.conf
+  sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
+  sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
+  export PHP_PM_MAX_CHILDREN=$FPMS
+  export PHP_MEMORY_LIMIT=$AvailableRAM
+  export PHP_UPLOAD_LIMIT=$AvailableRAM
+  pkill php-fpm
+  exec "$@"
+) &
 
 exec "$@"
