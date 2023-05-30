@@ -11,7 +11,7 @@ set +e
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
 AvailableRAM=$(awk -v foo=$(cat /sys/fs/cgroup/memory.max) -v bar=1024 'BEGIN { print $1foo/bar/bar  }')
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
-FPMS=150
+FPMS=100
 #FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
 PMinSS=$((PMaxSS/2))
