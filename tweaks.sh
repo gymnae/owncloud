@@ -3,7 +3,7 @@
 # start php-fpm in the background to be able to determine "optimal" settings
 
 php-fpm &
-sleep 20
+sleep 5
 
 # make the following commands not fail the script if they fail
 set +e
