@@ -12,7 +12,6 @@ FPMS=50
 PMaxSS=$((FPMS*2/3))
 PMinSS=$((PMaxSS/2))
 StartS=$(((PMaxSS+PMinSS)/2))
-
 # sed results into two locations, because i don't know which one stick
 
 sed -i 's/pm=.*/pm=static/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
@@ -44,7 +43,6 @@ export PHP_PM_MAX_CHILDREN=$FPMS
 export PHP_MEMORY_LIMIT=$AvailableRAM
 export PHP_UPLOAD_LIMIT=$AvailableRAM
 
-
 # server tuning according to https://docs.nextcloud.com/server/26/admin_manual/installation/server_tuning.html#enable-php-opcache
 sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=256M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
@@ -75,7 +73,7 @@ redis.session.lock_retries=-1
 redis.session.lock_wait_time=10000
 session.save_handler = redis
 session.save_path = "unix:///run/redis-socket/redis.sock?persistent=1&weight=1&database=0"' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-redis.ini
-pkill php-fpm
+kill -USR2 $(pidof php-fpm)
 
 ## hacks below commented out because nextcloud internal encryption is deactivated and replaced with rclone
 ## mounting an encrypted share
@@ -86,7 +84,6 @@ pkill php-fpm
 # sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/PreGenerate.php
 # sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/previewgenerator/lib/Command/Generate.php#
 # sed -i '\|this->encryptionManager->isEnabled|,/}/ s/^#*/#/' /var/www/html/apps/memories/lib/Command/Index.php
-
 
 # Start a subshell or background shell
 (
@@ -117,8 +114,7 @@ pkill php-fpm
   export PHP_PM_MAX_CHILDREN=$FPMS
   export PHP_MEMORY_LIMIT=$AvailableRAM
   export PHP_UPLOAD_LIMIT=$AvailableRAM
-  pkill php-fpm
-  exec "$@"
+  kill -USR2 $(pidof php-fpm)
 ) &
 
 exec "$@"
