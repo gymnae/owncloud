@@ -5,7 +5,7 @@ set +e
 
 # start with a fixed amount of max children, then collect data for 24hrs to adjust to a good setting later
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
-AvailableRAM=$(awk -v foo=$(cat /sys/fs/cgroup/memory.max) -v bar=1024 'BEGIN { print $1foo/bar/bar  }')
+AvailableRAM=$(awk -v foo=$(cat /sys/fs/cgroup/memory.max) -v bar=1024 'BEGIN { print $1foo/bar/bar*0.8  }')
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
 FPMS=75
 #FPMS=$((AvailableRAM/AverageFPM))
