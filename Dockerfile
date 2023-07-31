@@ -6,7 +6,6 @@ RUN set -ex; \
     apt install -y --no-install-recommends \
         imagemagick \
 	libfcgi-bin \
- 	ffmpeg \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
 	nano \
