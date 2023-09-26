@@ -47,7 +47,17 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: false
           tags: gymnae/owncloud:latest
+      - 
+        name: Slim it
+        uses: kitabisa/docker-slim-action@v1
+        env:
+          DSLIM_HTTP_PROBE: false
+        with:
+          target: ${{ github.repository }}:latest
+          tag: "slim"
+      -    
+        run: docker image push "${{ github.repository }}" --all-tags
       -
         uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
