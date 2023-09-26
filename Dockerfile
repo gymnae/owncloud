@@ -23,8 +23,7 @@ RUN set -ex; \
 #    && cd / \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
-COPY add_jellyfin_repo.sh / && \
-	tweaks.sh /
+COPY *.sh /
 RUN chmod a+x /*.sh
 RUN ./add_jellyfin_repo.sh
 # No need for updating because the shell script above does that for us.
