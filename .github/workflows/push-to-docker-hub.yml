@@ -39,13 +39,14 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-         # context: .
+          context: .
           platforms: linux/amd64,linux/arm64
-          push: false
+          push: true
           tags: ${{ github.repository }}:latest
       - uses: kitabisa/docker-slim-action@v1
         env:
           DSLIM_HTTP_PROBE: false
+          pull: true
         with:
           target: ${{ github.repository }}:latest
           tag: "slim"
