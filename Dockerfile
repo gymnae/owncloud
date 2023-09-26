@@ -23,8 +23,8 @@ RUN set -ex; \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
 COPY *.sh /
-RUN chmod a+x /*.sh
-RUN /bin/bash -c "source /add_jellyfin_repo.sh"
+RUN chmod a+x /*.sh && \
+	/bin/bash -c "source /add_jellyfin_repo.sh"
 # No need for updating because the shell script above does that for us.
 # RUN apt update
 
