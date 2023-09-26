@@ -12,7 +12,6 @@ RUN set -ex; \
 	nano \
         wget \
         samba-client \
-	ffmpeg \
     ; 
    # rm -rf /var/lib/apt/lists/*;
 
@@ -24,6 +23,13 @@ RUN set -ex; \
 #    && cd / \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
+COPY add_jellyfin_repo.sh add_jellyfin_repo.sh
+
+RUN ./add_jellyfin_repo.sh
+# No need for updating because the shell script above does that for us.
+# RUN apt update
+
+RUN apt install -y jellyfin-ffmpeg6
 
 RUN set -ex; \
 	apt-get clean autoclean \
