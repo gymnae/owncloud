@@ -47,7 +47,7 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: false
           DSLIM_PULL: true
-          DSLIM_IMAGE_BUILD_ARCH: amd64,aarch64
+          DSLIM_IMAGE_BUILD_ARCH: linux/amd64,linux/arm64
           DSLIM_HOST_EXEC: "/bin/bash ls && php-fpm"
         with:
           target: ${{ github.repository }}:latest
