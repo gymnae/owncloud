@@ -43,8 +43,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: false
           tags: gymnae/owncloud:latest
-      - name: Slim it
-        uses: kitabisa/docker-slim-action@v1
+      - uses: kitabisa/docker-slim-action@v1
         env:
           DSLIM_HTTP_PROBE: false
         with:
