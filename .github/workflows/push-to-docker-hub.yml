@@ -60,7 +60,7 @@ jobs:
       - uses: kitabisa/docker-slim-action@v1
         env:
           DSLIM_HTTP_PROBE: false
-          DSLIM_PULL: false
+          DSLIM_PULL: true
           DSLIM_IMAGE_BUILD_ARCH: amd64
           DSLIM_HOST_EXEC: "/bin/bash ls && php-fpm"
         with:
