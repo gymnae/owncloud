@@ -32,7 +32,7 @@ jobs:
       - name: Cache Docker layers
         uses: actions/cache@v3
         with:
-          path: /tmp/.buildx-cache
+          path: tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx- 
@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: false
+          push: true
           tags: ${{ github.repository }}:latest
           platforms: linux/amd64,linux/arm64
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -55,16 +55,16 @@ jobs:
         # https://github.com/moby/buildkit/issues/1896
         name: Move cache
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cach
-      - uses: kitabisa/docker-slim-action@v1
-        env:
-          DSLIM_HTTP_PROBE: false
-          DSLIM_PULL: true
-          DSLIM_IMAGE_BUILD_ARCH: amd64
-          DSLIM_HOST_EXEC: "/bin/bash ls && php-fpm"
-        with:
-          target: ${{ github.repository }}:latest
-          tag: "slim"
-      - run: docker image push "${{ github.repository }}" --all-tags
+          rm -rf tmp/.buildx-cache
+          mv tmp/.buildx-cache-new tmp/.buildx-cach
+#      - uses: kitabisa/docker-slim-action@v1
+#        env:
+#          DSLIM_HTTP_PROBE: false
+#          DSLIM_PULL: true
+#          DSLIM_IMAGE_BUILD_ARCH: amd64
+#          DSLIM_HOST_EXEC: "/bin/bash ls && php-fpm"
+#        with:
+#          target: ${{ github.repository }}:latest
+#          tag: "slim"
+#      - run: docker image push "${{ github.repository }}" --all-tags
       - uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
