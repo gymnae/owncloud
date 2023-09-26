@@ -1,6 +1,5 @@
 FROM nextcloud:27-fpm 
-
-    
+ 
 RUN set -ex; \
     \
     apt update; \
@@ -25,7 +24,7 @@ RUN set -ex; \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
 COPY *.sh /
 RUN chmod a+x /*.sh
-RUN ./add_jellyfin_repo.sh
+RUN /bin/bash -c "source /add_jellyfin_repo.sh"
 # No need for updating because the shell script above does that for us.
 # RUN apt update
 
