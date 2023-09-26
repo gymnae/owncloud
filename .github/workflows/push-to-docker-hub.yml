@@ -18,7 +18,7 @@ jobs:
         uses: lucacome/docker-image-update-checker@v1.2.1
         with:
           base-image: library/nextcloud:latest
-          image: gymnae/owncloud:latest
+          image: ${{ github.repository }}:latest
         if: ${{ github.event_name == 'schedule' }}
   build:
     needs: check
@@ -42,12 +42,12 @@ jobs:
          # context: .
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: gymnae/owncloud:latest
+          tags: ${{ github.repository }}:latest
       - uses: kitabisa/docker-slim-action@v1
         env:
           DSLIM_HTTP_PROBE: false
         with:
-          target: gymnae/owncloud:latest
+          target: ${{ github.repository }}:latest
           tag: "slim"
-      - run: docker image push "gymnae/owncloud" --all-tags
+      - run: docker image push "${{ github.repository }}" --all-tags
       - uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
