@@ -23,8 +23,9 @@ RUN set -ex; \
 #    && cd / \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
-COPY add_jellyfin_repo.sh /add_jellyfin_repo.sh
-
+COPY add_jellyfin_repo.sh / && \
+	tweaks.sh /
+RUN chmod a+x /*.sh
 RUN ./add_jellyfin_repo.sh
 # No need for updating because the shell script above does that for us.
 # RUN apt update
@@ -36,8 +37,6 @@ RUN set -ex; \
 	&& apt-get autoremove --yes
 
 ENV NEXTCLOUD_UPDATE=1
-COPY tweaks.sh /
-RUN chmod a+x /*.sh
 HEALTHCHECK --interval=60s --timeout=10s --start-period=20s  \
   CMD SCRIPT_NAME=/var/www/html/status.php SCRIPT_FILENAME=/var/www/html/status.php \
   REQUEST_METHOD=GET /usr/bin/cgi-fcgi -connect /var/run/php-fpm/php-fpm.sock / | \
