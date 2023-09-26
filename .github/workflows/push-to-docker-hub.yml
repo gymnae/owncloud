@@ -55,7 +55,7 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: false
         with:
-          target:  gymnae/owncloud:latest
+          target: gymnae/owncloud:latest
           tag: "slim"
       -    
         run: docker image push "gymnae/owncloud" --all-tags
