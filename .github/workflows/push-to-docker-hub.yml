@@ -45,7 +45,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+         # context: .
           platforms: linux/amd64,linux/arm64
           push: false
           tags: gymnae/owncloud:latest
@@ -55,9 +55,9 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: false
         with:
-          target: gymnae/owncloud:latest
+          target: ${{ github.repository }}:latest
           tag: "slim"
       -    
-        run: docker image push "gymnae/owncloud" --all-tags
+        run: docker image push "${{ github.repository }}" --all-tags
       -
         uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
