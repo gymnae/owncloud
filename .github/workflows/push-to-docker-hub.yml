@@ -46,7 +46,8 @@ jobs:
       - uses: kitabisa/docker-slim-action@v1
         env:
           DSLIM_HTTP_PROBE: false
-          pull: true
+          DSLIM_PULL: true
+          DSLIM_IMAGE_BUILD_ENG: internal
         with:
           target: ${{ github.repository }}:latest
           tag: "slim"
