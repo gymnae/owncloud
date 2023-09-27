@@ -34,7 +34,7 @@ RUN set -ex; \
 	apt-get clean autoclean \
 	&& apt-get autoremove --yes
 
-ENV NEXTCLOUD_UPDATE=1
+#ENV NEXTCLOUD_UPDATE=1
 #HEALTHCHECK --interval=60s --timeout=10s --start-period=20s  \
 #  CMD SCRIPT_NAME=/var/www/html/status.php SCRIPT_FILENAME=/var/www/html/status.php \
 #  REQUEST_METHOD=GET /usr/bin/cgi-fcgi -connect /var/run/php-fpm/php-fpm.sock / | \
