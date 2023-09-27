@@ -39,4 +39,7 @@ ENV NEXTCLOUD_UPDATE=1
 #  CMD SCRIPT_NAME=/var/www/html/status.php SCRIPT_FILENAME=/var/www/html/status.php \
 #  REQUEST_METHOD=GET /usr/bin/cgi-fcgi -connect /var/run/php-fpm/php-fpm.sock / | \
 #  grep '\"installed\":true' | grep '\"maintenance\":false' | grep '\"needsDbUpgrade\":false' || exit 1
-CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
+#CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
+COPY *.sh upgrade.exclude /
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php-fpm"]
