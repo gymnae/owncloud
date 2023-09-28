@@ -41,5 +41,5 @@ RUN set -ex; \
 #  grep '\"installed\":true' | grep '\"maintenance\":false' | grep '\"needsDbUpgrade\":false' || exit 1
 #CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
 #COPY *.sh upgrade.exclude /
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["./tweaks.sh php-fpm"]
+ENTRYPOINT ["/tweaks.sh"]
+CMD ["php-fpm"]
