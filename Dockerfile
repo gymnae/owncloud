@@ -28,7 +28,9 @@ RUN chmod a+x /*.sh && \
 # No need for updating because the shell script above does that for us.
 # RUN apt update
 
-RUN apt install -y jellyfin-ffmpeg6
+RUN apt install -y jellyfin-ffmpeg6 \
+    && ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin \
+    && ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin
 
 RUN set -ex; \
 	apt-get clean autoclean \
