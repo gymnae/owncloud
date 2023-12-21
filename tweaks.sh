@@ -47,11 +47,11 @@ export PHP_UPLOAD_LIMIT=$AvailableRAM
 sed -i  's/opcache.jit_buffer_size=.*/opcache.jit_buffer_size=256M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 sed -i  's/opcache.memory_consumption=.*/opcache.memory_consumption=512M/' ${PHP_INI_DIR}/conf.d/opcache-recommended.ini
 
-# have php-fpm listen on a unix socket
-mkdir -p /var/run/php-fpm
-sed -i  's;listen =.*;listen = /var/run/php-fpm/php-fpm.sock;' /usr/local/etc/php-fpm.d/zz-docker.conf
-echo 'listen.owner = www-data
-listen.group = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+## have php-fpm listen on a unix socket
+# mkdir -p /var/run/php-fpm
+# sed -i  's;listen =.*;listen = /var/run/php-fpm/php-fpm.sock;' /usr/local/etc/php-fpm.d/zz-docker.conf
+# echo 'listen.owner = www-data
+# listen.group = www-data' >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
 # tune the postgreSQL php config
 rm ${PHP_INI_DIR}/conf.d/docker-php-ext-pdo_pgsql.ini
