@@ -67,4 +67,5 @@ jobs:
 #          target: ${{ github.repository }}:latest
 #          tag: "slim"
 #      - run: docker image push "${{ github.repository }}" --all-tags
-      - uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
+      - name: keep alive
+        uses: gautamkrishnar/keepalive-workflow@v1
