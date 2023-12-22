@@ -10,6 +10,7 @@ RUN set -ex; \
         procps \
 	nano \
         wget \
+	python3-venv \
         samba-client \
     ; 
    # rm -rf /var/lib/apt/lists/*;
