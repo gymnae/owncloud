@@ -33,12 +33,10 @@ RUN apt install -y jellyfin-ffmpeg6 \
     && ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin \
     && ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin
 
-RUN apt-get update && \
-    apt-get install -y lsb-release && \
-    echo "deb http://ftp.debian.org/debian $(lsb_release -cs) non-free" >> \
+RUN echo "deb http://ftp.debian.org/debian $(lsb_release -cs) non-free" >> \
        /etc/apt/sources.list.d/intel-graphics.list && \
-    apt-get update && \
-    apt-get install -y intel-media-va-driver-non-free ffmpeg && \
+    apt update && \
+    apt install -y lsb-release intel-media-va-driver-non-free && \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -ex; \
