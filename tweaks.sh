@@ -90,6 +90,7 @@ GID=`stat -c "%g" /dev/dri/renderD128`
 groupadd -g $GID render2 || true # sometimes this is needed
 GROUP=`getent group $GID | cut -d: -f1`
 usermod -aG $GROUP www-data
+usermod -aG render www-data
 
 # Start a subshell or background shell
 (
