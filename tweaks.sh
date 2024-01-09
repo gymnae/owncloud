@@ -88,8 +88,9 @@ session.save_path = "unix:///run/redis-socket/redis.sock?persistent=1&weight=1&d
 # give access to the intel iGPU transcoding device to www-data
 addgroup --gid 486 --quiet --system render
 GID=`stat -c "%g" /dev/dri/renderD128`
-# groupadd -g $GID render2 || true
+groupadd -g $GID render2 || true
 GROUP=`getent group $GID | cut -d: -f1`
+usermod -aG $GID www-data
 usermod -aG render www-data
 
 # install intel driver for amd64
