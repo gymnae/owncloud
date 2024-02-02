@@ -9,9 +9,9 @@ set +e
 AvailableRAM=$(awk '/MemAvailable/ {printf "%d", ($2/1024)*0.8}' /proc/meminfo)
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
 # set initial children at a fixed number
-#FPMS=75
+FPMS=75
 # set initial children as a ram based calculat ion
-FPMS=$((AvailableRAM/AverageFPM))
+#FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
 PMinSS=$((PMaxSS/2))
 StartS=$(((PMaxSS+PMinSS)/2))
