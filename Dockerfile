@@ -10,6 +10,8 @@ RUN set -ex; \
         procps \
 	nano \
         wget \
+	php-bz2 \
+ 	php-intl \
 	python3-venv \
         samba-client \
     ; 
