@@ -4,18 +4,19 @@ RUN set -ex; \
     \
     apt update; \
     apt install -y --no-install-recommends \
-        imagemagick \
 	libfcgi-bin \
+        libbz2-dev \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
 	nano \
         wget \
-	php-bz2 \
- 	php-intl \
 	python3-venv \
         samba-client \
     ; 
    # rm -rf /var/lib/apt/lists/*;
+
+## add bz2 module, even if may not be needed - https://github.com/nextcloud/server/pull/43013
+RUN docker-php-ext-install bz2
 
 ## need to fix to switch to adding repo of jellyfin for arch specific file
 #RUN mkdir -p /opt/ffmpeg \
