@@ -5,10 +5,13 @@ set +e
 
 # start with a fixed amount of max children, then collect data for 24hrs to adjust to a good setting later
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
-AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
+# but modified to use only 80% of allocated ram
+AvailableRAM=$(awk '/MemAvailable/ {printf "%d", ($2/1024)*0.8}' /proc/meminfo)
 AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
-FPMS=75
-#FPMS=$((AvailableRAM/AverageFPM))
+# set initial children at a fixed number
+#FPMS=75
+# set initial children as a ram based calculat ion
+FPMS=$((AvailableRAM/AverageFPM))
 PMaxSS=$((FPMS*2/3))
 PMinSS=$((PMaxSS/2))
 StartS=$(((PMaxSS+PMinSS)/2))
@@ -73,6 +76,7 @@ redis.session.lock_retries=-1
 redis.session.lock_wait_time=10000
 session.save_handler = redis
 session.save_path = "unix:///run/redis-socket/redis.sock?persistent=1&weight=1&database=0"' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-redis.ini
+## not needed anymore?
 # kill -USR2 $(pidof php-fpm)
 
 ## hacks below commented out because nextcloud internal encryption is deactivated and replaced with rclone
@@ -103,7 +107,7 @@ apt update && apt install -y intel-media-va-driver-non-free
   # Second set of commands
   echo "Running second set of commands 24 hours later"
   # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
-  AvailableRAM=$(awk '/MemAvailable/ {printf "%d", $2/1024}' /proc/meminfo)
+  AvailableRAM=$(awk '/MemAvailable/ {printf "%d", ($2/1024)*0.8}' /proc/meminfo)
   AverageFPM=$(ps --no-headers -o 'rss,cmd' -C php-fpm | awk '{ sum+=$1 } END { printf ("%d\n", sum/NR/1024,"M") }')
   FPMS=$((AvailableRAM/AverageFPM))
   PMaxSS=$((FPMS*2/3))
