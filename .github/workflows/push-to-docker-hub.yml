@@ -67,5 +67,11 @@ jobs:
 #          target: ${{ github.repository }}:latest
 #          tag: "slim"
 #      - run: docker image push "${{ github.repository }}" --all-tags
-      - name: keep alive
-        uses: gautamkrishnar/keepalive-workflow@v1
+  keepalive-job:
+    name: Keepalive Workflow
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/keepalive-workflow@v2
