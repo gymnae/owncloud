@@ -28,7 +28,6 @@ sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/con
 # no output compression because I compress via reverse proxy
 echo 'zlib.output_compression=Off' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 # static because I fix the max children to a number for now
-echo 'pm = static' >> ${PHP_INI_DIR}/conf.d/nextcloud.ini
 
 #sed -i 's/pm =.*/pm = static/' /usr/local/etc/php-fpm.d/www.conf
 #sed -i 's/pm.max_children =.*/pm.max_children = '$FPMS'/' /usr/local/etc/php-fpm.d/www.conf
@@ -117,8 +116,6 @@ apt update && apt install -y intel-media-va-driver-non-free
   sed -i 's/pm.start_servers=.*/pm.start_servers='$StartS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
   sed -i 's/pm.min_spare_servers=.*/pm.min_spare_servers='$PMinSS'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
   sed -i 's/pm.max_spare_servers=.*/pm.max_spare_servers='$PMaxSS'/' /${PHP_INI_DIR}/conf.d/nextcloud.ini
-  sed -i 's/pm.min_spare_servers =.*/pm.min_spare_servers = '$PMinSS'/' /usr/local/etc/php-fpm.d/www.conf
-  sed -i 's/pm.max_spare_servers =.*/pm.max_spare_servers = '$PMaxSS'/' /usr/local/etc/php-fpm.d/www.conf
   sed -i 's/memory_limit=.*/memory_limit='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
   sed -i 's/upload_max_filesize=.*/upload_max_filesize='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
   sed -i 's/post_max_size=.*/post_max_size='"$AvailableRAM"M'/' ${PHP_INI_DIR}/conf.d/nextcloud.ini
@@ -129,7 +126,7 @@ apt update && apt install -y intel-media-va-driver-non-free
   export PHP_PM_MAX_CHILDREN=$FPMS
   export PHP_MEMORY_LIMIT=$AvailableRAM
   export PHP_UPLOAD_LIMIT=$AvailableRAM
-  kill -USR2 $(pidof php-fpm)
+  kill -USR2 $(pidof php)
 ) &
 
 exec "$@"
