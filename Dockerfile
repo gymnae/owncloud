@@ -53,4 +53,4 @@ ENV NEXTCLOUD_UPDATE=1
 #CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
 #COPY *.sh upgrade.exclude /
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/tweaks.sh php-fpm"]
+CMD ["/tweaks.sh apache2-foreground"]
