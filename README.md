@@ -4,3 +4,4 @@ Nextcloud - based on the official docker image with custom tweaks:
 - better handling of custom apps
 - more debian binary packages
 - tailored php configuration
+- new: based on nextcloud:apache for better self-containment
