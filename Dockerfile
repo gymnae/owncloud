@@ -52,5 +52,7 @@ ENV NEXTCLOUD_UPDATE=1
 #  grep '\"installed\":true' | grep '\"maintenance\":false' | grep '\"needsDbUpgrade\":false' || exit 1
 #CMD ["/bin/bash", "-c", "source /tweaks.sh php-fpm"]
 #COPY *.sh upgrade.exclude /
+COPY tweaks.sh /tweaks.sh 
+RUN chmod a+x /tweaks.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/tweaks.sh apache2-foreground"]
