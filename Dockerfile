@@ -10,10 +10,28 @@ RUN set -ex; \
         procps \
 	nano \
         wget \
+	aom-tools \
+ 	build-essential \
 	python3-venv \
         samba-client \
     ; 
    # rm -rf /var/lib/apt/lists/*;
+
+## add required things for aom 3.x
+RUN set -ex; \
+    \
+    apt update; \
+    apt install -y --no-install-recommends \
+    cmake \
+    git \
+    yasm &&
+    git clone https://aomedia.googlesource.com/aom \
+    cd aom \
+    mkdir build \
+    cmake .. \
+    make \
+    make install \
+    rm -rf /aom
 
 ## add bz2 module, even if may not be needed - https://github.com/nextcloud/server/pull/43013
 RUN docker-php-ext-install bz2
