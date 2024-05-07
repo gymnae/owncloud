@@ -24,14 +24,37 @@ RUN set -ex; \
     apt install -y --no-install-recommends \
     cmake \
     git \
-    yasm &&
-    git clone https://aomedia.googlesource.com/aom \
-    cd aom \
-    mkdir build \
-    cmake .. \
-    make \
-    make install \
-    rm -rf /aom
+    yasm \
+    libltdl-dev \
+    ; 
+   # rm -rf /var/lib/apt/lists/* 
+   
+RUN git clone https://aomedia.googlesource.com/aom; \
+    cd aom; \
+    mkdir build; \
+    cmake ..; \
+    make; \
+    make install; \
+    rm -rf /aom;
+
+RUN  t=$(mktemp) && \
+	wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
+ 	bash "$t" && \
+  	rm "$t"
+   
+RUN set -ex; \
+	\
+ 	apt update; \
+  	apt install -y --no-install-recommends \
+   	libmagickwand-dev; \
+    	git clone https://github.com/Imagick/imagick.git; \
+     	cd imagick; \
+	phpize; \
+ 	./configure; \
+  	make; \
+   	make install; \
+    	apt remove -y git libmagickwand-dev; \
+     	apt autoremove -y \
 
 ## add bz2 module, even if may not be needed - https://github.com/nextcloud/server/pull/43013
 RUN docker-php-ext-install bz2
