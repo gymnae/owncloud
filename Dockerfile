@@ -6,11 +6,6 @@ RUN set -ex; \
     apt install -y --no-install-recommends \
 	libfcgi-bin \
         libbz2-dev \
-	libpng-dev \
- 	libjpeg-dev \
-  	libtiff-dev \
-   	libheif-dev \
-    	imagemagick \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
 	nano \
