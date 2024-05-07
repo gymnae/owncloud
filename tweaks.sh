@@ -3,24 +3,6 @@
 # make the following commands not fail the script if they fail
 set +e
 
-# install a fresh imagemagick with all niceties
-# from: https://softcreatr.github.io/imei/
-t=$(mktemp) && \
-wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
-bash "$t" && \
-rm "$t"
-
-# also update the php extenstion
-apt install git ligmagickwand-dev
-git clone https://github.com/Imagick/imagick.git
-cd imagick
-phpize
-./configure
-make
-make install
-apt remove -y git libmagickwand-dev
-apt autoremove -y
-
 # start with a fixed amount of max children, then collect data for 24hrs to adjust to a good setting later
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
 # but modified to use only 80% of allocated ram
