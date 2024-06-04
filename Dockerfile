@@ -6,6 +6,7 @@ RUN set -ex; \
     apt install -y --no-install-recommends \
 	libfcgi-bin \
         libbz2-dev \
+	checkinstall \
         $(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
         procps \
 	nano \
@@ -25,30 +26,26 @@ RUN git clone https://aomedia.googlesource.com/aom; \
     mkdir build; \
     cmake ..; \
     make; \
-    make install; \
-    rm -rf /aom;
-
-RUN  t=$(mktemp) && \
-	wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
- 	bash "$t" && \
-  	rm "$t"
+    checkinstall; \
+    rm -rf /aom /var/www/html/aom \
+    ;
    
-RUN set -ex; \
-	\
- 	apt update; \
-  	apt install -y --no-install-recommends \
-   	libmagickwand-dev; \
-    	git clone https://github.com/Imagick/imagick.git; \
-     	cd imagick; \
-	phpize; \
- 	./configure; \
-  	make; \
-   	make install; \
-    	apt remove -y git libmagickwand-dev; \
-     	apt autoremove -y
+#RUN set -ex; \
+#	\
+# 	apt update; \
+#  	apt install -y --no-install-recommends \
+#   	libmagickwand-dev; \
+#    	git clone https://github.com/Imagick/imagick.git; \
+#     	cd imagick; \
+#	phpize; \
+# 	./configure; \
+#  	make; \
+#   	checkinstall; \
+#	rm -rf imagick; \
+#     	apt autoremove -y
 
 ## add bz2 module, even if may not be needed - https://github.com/nextcloud/server/pull/43013
-RUN docker-php-ext-install bz2
+RUN	docker-php-ext-install bz2
 
 ## need to fix to switch to adding repo of jellyfin for arch specific file
 #RUN mkdir -p /opt/ffmpeg \
@@ -58,15 +55,29 @@ RUN docker-php-ext-install bz2
 #    && cd / \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
-COPY *.sh /
-RUN chmod a+x /*.sh && \
-	/bin/bash -c "source /add_jellyfin_repo.sh"
+#COPY *.sh /
+#RUN chmod a+x /*.sh && \
+#	/bin/bash -c "source /add_jellyfin_repo.sh"
 # No need for updating because the shell script above does that for us.
 # RUN apt update
 
-RUN apt install -y jellyfin-ffmpeg6 \
+RUN set -ex; \
+    \
+    apt update; \
+    apt install -y extrepo --no-install-recommends; \
+    extrepo enable jellyfin
+
+RUN set -ex; \
+    \
+    apt update; \
+    apt install -y jellyfin-ffmpeg6 --no-install-recommends \
     && ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin \
     && ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin
+
+RUN  t=$(mktemp) && \
+        wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && \
+        bash "$t" --use-checkinstall --force  && \
+        rm "$t"
 
 RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /etc/apt/sources.list.d/debian.sources
 ## moved to tweaks, because only possible for amd64 and not arm
@@ -74,8 +85,29 @@ RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /et
 #    apt install -y intel-media-va-driver-non-free
 
 RUN set -ex; \
-	apt-get clean autoclean \
-	&& apt-get autoremove --yes
+	apt clean autoclean; \
+	apt update; \
+        apt --fix-broken install -y; \
+	apt remove -y \
+		git \
+		cmake \
+		extrepo \
+		build-essential \
+		libfcgi-bin \
+		libbz2-dev \
+		procps \
+		libltdl-dev \
+		imei-libheif \
+		imei-libjxl \
+		libmagickcore-6.q16-6 \
+		libmagickwand-6.q16-6 \
+		libde265-dev libx265-dev libltdl-dev libopenjp2-7-dev liblcms2-dev libbrotli-dev libzip-dev libbz2-dev \
+		liblqr-1-0-dev libzstd-dev libgif-dev libjpeg-dev libopenexr-dev libpng-dev libwebp-dev \
+		librsvg2-dev libwmf-dev libxml2-dev libxml2 libtiff-dev libraw-dev ghostscript \
+		libpango1.0-dev libdjvulibre-dev libfftw3-dev libgs-dev libgraphviz-dev \
+		$(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
+		libmagickwand-dev; \
+	apt autoremove --yes
 
 ENV NEXTCLOUD_UPDATE=1
 #HEALTHCHECK --interval=60s --timeout=10s --start-period=20s  \
