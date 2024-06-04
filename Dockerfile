@@ -55,8 +55,6 @@ RUN	docker-php-ext-install bz2
 #    && cd / \
 #    && ln -s /opt/ffmpeg/ffmpeg /usr/bin \
 #    && ln -s /opt/ffmpeg/ffprobe /usr/bin
-#COPY *.sh /
-#RUN chmod a+x /*.sh && \
 #	/bin/bash -c "source /add_jellyfin_repo.sh"
 # No need for updating because the shell script above does that for us.
 # RUN apt update
@@ -87,7 +85,7 @@ RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /et
 RUN set -ex; \
 	apt clean autoclean; \
 	apt update; \
-        apt --fix-broken install -y; \
+	apt --fix-broken install -y; \
 	apt remove -y \
 		git \
 		cmake \
@@ -97,17 +95,18 @@ RUN set -ex; \
 		libbz2-dev \
 		procps \
 		libltdl-dev \
-		imei-libheif \
-		imei-libjxl \
-		libmagickcore-6.q16-6 \
-		libmagickwand-6.q16-6 \
 		libde265-dev libx265-dev libltdl-dev libopenjp2-7-dev liblcms2-dev libbrotli-dev libzip-dev libbz2-dev \
 		liblqr-1-0-dev libzstd-dev libgif-dev libjpeg-dev libopenexr-dev libpng-dev libwebp-dev \
-		librsvg2-dev libwmf-dev libxml2-dev libxml2 libtiff-dev libraw-dev ghostscript \
+		librsvg2-dev libwmf-dev libxml2-dev libtiff-dev libraw-dev ghostscript \
 		libpango1.0-dev libdjvulibre-dev libfftw3-dev libgs-dev libgraphviz-dev \
-		$(apt-cache search libmagickcore-6.q[0-9][0-9]-[0-9]-extra | cut -d " " -f1) \
 		libmagickwand-dev; \
 	apt autoremove --yes
+
+RUN set -ex; \
+        apt clean autoclean
+
+COPY *.sh /
+RUN chmod a+x /*.sh 
 
 ENV NEXTCLOUD_UPDATE=1
 #HEALTHCHECK --interval=60s --timeout=10s --start-period=20s  \
