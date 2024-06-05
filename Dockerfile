@@ -93,7 +93,6 @@ RUN set -ex; \
 		build-essential \
 		libfcgi-bin \
 		libbz2-dev \
-		procps \
 		libltdl-dev \
 		libde265-dev libx265-dev libltdl-dev libopenjp2-7-dev liblcms2-dev libbrotli-dev libzip-dev libbz2-dev \
 		liblqr-1-0-dev libzstd-dev libgif-dev libjpeg-dev libopenexr-dev libpng-dev libwebp-dev \
