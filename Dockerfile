@@ -21,15 +21,15 @@ RUN set -ex; \
     ; 
    # rm -rf /var/lib/apt/lists/*;
    
-RUN git clone https://aomedia.googlesource.com/aom; \
-    cd aom; \
-    mkdir build; \
-    cd build; \
-    cmake ..; \
-    make; \
-    checkinstall; \
-    rm -rf /aom /var/www/html/aom \
-    ;
+#RUN git clone https://aomedia.googlesource.com/aom; \
+#    cd aom; \
+#    mkdir build; \
+#    cd build; \
+#    cmake ..; \
+#    make; \
+ #   checkinstall; \
+#    rm -rf /aom /var/www/html/aom \
+#    ;
    
 #RUN set -ex; \
 #	\
