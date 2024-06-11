@@ -24,6 +24,7 @@ RUN set -ex; \
 RUN git clone https://aomedia.googlesource.com/aom; \
     cd aom; \
     mkdir build; \
+    cd build; \
     cmake ..; \
     make; \
     checkinstall; \
