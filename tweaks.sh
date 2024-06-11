@@ -3,8 +3,8 @@
 # make the following commands not fail the script if they fail
 set +e
 
-# remove unnecessary src directory when the container is running
-rm -rf /usr/src/nextcloud
+## remove unnecessary src directory when the container is running
+#rm -rf /usr/src/nextcloud
 
 # start with a fixed amount of max children, then collect data for 24hrs to adjust to a good setting later
 # calculate following https://www.c-rieger.de/nextcloud-installationsanleitung-apache2/#Installation%20PHP%208.0 howto
