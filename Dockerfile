@@ -117,4 +117,3 @@ ENV NEXTCLOUD_UPDATE=1
 #COPY *.sh upgrade.exclude /
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/tweaks.sh php-fpm"]
-#
