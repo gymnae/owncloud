@@ -100,8 +100,8 @@ GROUP=`getent group $GID | cut -d: -f1`
 usermod -aG $GID www-data
 usermod -aG render www-data
 
-# install intel driver for amd64
-apt update && apt install -y intel-media-va-driver-non-free
+# install intel & mesa driver for amd64
+apt update && apt install -y mesa-va-drivers intel-media-va-driver-non-free
 
 # Start a subshell or background shell
 (
